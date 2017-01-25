@@ -44,8 +44,7 @@
               "description": "The remote IP address who issued the HTTP request"
             },
             "request_id": {
-              "type": "string",
-              "description": "The request ID for the HTTP request"
+              "$ref": "#/definitions/request_id"
             }
           }
         },
@@ -282,8 +281,7 @@
                       "description": "The referring URL that resulted in this request."
                     },
                     "request_id": {
-                      "type": "string",
-                      "description": "A unique value representing this request, and is used to trace this request across services."
+                      "$ref": "#/definitions/request_id"
                     },
                     "user-agent": {
                       "type": "string",
@@ -423,6 +421,10 @@
       "minimum": 100,
       "maximum": 599,
       "description": "The status as defined by the HTTP status codes."
+    },
+    "request_id": {
+      "type": "string",
+      "description": "A unique identifier for the HTTP request, typically used to trace this request across services."
     },
     "time_ms": {
       "type": "number",
