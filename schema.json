@@ -392,15 +392,14 @@
     }
   },
   "definitions": {
-    "http_status": {
-      "type": "integer",
-      "minimum": 100,
-      "maximum": 599,
-      "description": "The status as defined by the HTTP status codes."
-    },
     "http_host": {
       "type": "string",
       "description": "The target host of the HTTP request. This may not be the same as the real hostname of the server."
+    },
+    "http_method": {
+      "type": "string",
+      "description": "The HTTP method for the request.",
+      "enum": ["CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "POST"," PUT", "TRACE"]
     },
     "http_path": {
       "type": "string",
@@ -410,10 +409,6 @@
       "type": "integer",
       "description": "The target port of the HTTP request. This may be different than the port the server is listening on."
     },
-    "http_host": {
-      "type": "string",
-      "description": "The target host of the HTTP request. This may not be the same as the real hostname of the server."
-    },
     "http_query_params": {
       "type": "object",
       "description": "The query parameters present on the URL"
@@ -422,6 +417,12 @@
       "type": "string",
       "enum": ["http", "https"],
       "description": "The HTTP request scheme."
+    },
+    "http_status": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 599,
+      "description": "The status as defined by the HTTP status codes."
     },
     "time_ms": {
       "type": "number",
