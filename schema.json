@@ -3,8 +3,12 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Timber.io Log Event Schema",
   "type": "object",
-  "required": ["id", "dt", "message"],
+  "required": ["$schema", "id", "dt", "message"],
   "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "The URL for the Timber log line JSON schema that the current document adheres to."
+    },
     "id": {
       "type": "string",
       "description": "The unique identifer for this log line. This identifier is created and assigned by Timber."
