@@ -25,7 +25,7 @@
     "message": {
       "type": "string",
       "description": "The log event message",
-      "maxLength": "50000" // ~ 50kb
+      "maxLength": "50000"
     },
     "level": {
       "enum": ["debug", "info", "warn", "error", "fatal"],
