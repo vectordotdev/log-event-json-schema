@@ -459,7 +459,7 @@
               "service_ms": {
                 "type": "number",
                 "description": "The time, in fractional milliseconds, it took for the downstream service to process and respond to the request.",
-                "minimum": 0,
+                "minimum": 0
               },
               "status": {
                 "$ref": "#/definitions/http_status"
