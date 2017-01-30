@@ -8,14 +8,14 @@
     "$schema": {
       "type": "string",
       "description": "The URL for the Timber log line JSON schema that the current document adheres to.",
-      "minLength": "1",
-      "maxLength": "255"
+      "minLength": 1,
+      "maxLength": 255
     },
     "id": {
       "type": "string",
       "description": "The unique identifer for this log line. This identifier is created and assigned by Timber.",
-      "minLength": "1",
-      "maxLength": "255"
+      "minLength": 1,
+      "maxLength": 255
     },
     "dt": {
       "type": "string",
