@@ -7,11 +7,15 @@
   "properties": {
     "$schema": {
       "type": "string",
-      "description": "The URL for the Timber log line JSON schema that the current document adheres to."
+      "description": "The URL for the Timber log line JSON schema that the current document adheres to.",
+      "minLength": "1",
+      "maxLength": "255"
     },
     "id": {
       "type": "string",
-      "description": "The unique identifer for this log line. This identifier is created and assigned by Timber."
+      "description": "The unique identifer for this log line. This identifier is created and assigned by Timber.",
+      "minLength": "1",
+      "maxLength": "255"
     },
     "dt": {
       "type": "string",
@@ -20,32 +24,31 @@
     },
     "message": {
       "type": "string",
-      "description": "The log event message"
+      "description": "The log event message",
+      "maxLength": "50000" // ~ 50kb
     },
     "level": {
-      "type": "string",
-      "description": "The level of the log event message. Typically this is one of debug, error, info, warn, fatal."
+      "enum": ["debug", "info", "warn", "error", "fatal"],
+      "description": "The level of the log event message."
     },
     "context": {
       "type": "object",
       "description": "Contextual metadata about the environment the event takes place in",
+      "minProperties": 1,
       "properties": {
         "http": {
           "type": "object",
           "description": "Context about the HTTP request currently being processed (if any)",
-          "parameters": {
+          "required": ["method", "path"],
+          "properties": {
             "method": {
-              "enum": ["CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "POST"," PUT", "TRACE"],
-              "description": "The method, such as GET, POST, PUT, etc, for the HTTP request"
+              "$ref": "#/definitions/http_method"
             },
             "path": {
-              "type": "string",
-              "description": "The path for the HTTP request"
+              "$ref": "#/definitions/http_path"
             },
             "remote_addr": {
-              "type": "string",
-              "format": "ipv6",
-              "description": "The remote IP address who issued the HTTP request"
+              "$ref": "#/definitions/http_remote_addr"
             },
             "request_id": {
               "$ref": "#/definitions/request_id"
@@ -55,32 +58,42 @@
         "organization": {
           "type": "object",
           "description": "Represents an organization in the platform being logged. The interpretation of \"organization\" is left to the consumer.",
-          "parameters": {
+          "minProperties": 1,
+          "properties": {
             "id": {
               "type": "string",
-              "description": "A unique identifier for the organization"
+              "description": "A unique identifier for the organization",
+              "minLength": 1,
+              "maxLength": 255
             },
             "name": {
               "type": "string",
-              "description": "A display name for the organization"
+              "description": "A display name for the organization",
+              "minLength": 1,
+              "maxLength": 255
             }
           }
         },
         "platform": {
           "type": "object",
           "description": "Contextual information about the hosting platform (AWS, Google Cloud, Heroku, etc) the application is hosted.",
+          "minProperties": 1,
           "properties": {
             "heroku": {
               "type": "object",
               "description": "Contextual information for the Heroku platform.",
+              "required": ["dyno_type", "source"],
               "properties": {
                 "dyno_type": {
                   "type": "string",
-                  "description": "The dyno type for the process (web, worker, router, etc)"
+                  "description": "The dyno type for the process (web, worker, router, etc)",
+                  "minLength": 1,
+                  "maxLength": 255
                 },
                 "dyno_id": {
                   "type": "integer",
-                  "description": "The dyno ID for the process."
+                  "description": "The dyno ID for the process.",
+                  "minimum": 1
                 },
                 "source": {
                   "description": "The source of the log message. For example, Heroku can send log messages for the web.1 dyno from both within the app and Heroku itself.",
@@ -93,72 +106,100 @@
         "process": {
           "type": "object",
           "description": "Operating system process details.",
+          "required": ["id"],
           "properties": {
             "id": {
               "type": "string",
-              "description": "The current operating system process ID as defined by the `pid` command in Unix."
+              "description": "The current operating system process ID as defined by the `pid` command in Unix.",
+              "minLength": 1,
+              "maxLength": 255
             }
           }
         },
         "runtime": {
           "type": "object",
           "description": "Represents the language runtime details.",
+          "minProperties": 1,
           "properties": {
             "application": {
               "type": "string",
-              "description": "The current application name"
+              "description": "The current application name",
+              "minLength": 1,
+              "maxLength": 255
             },
             "class": {
               "type": "string",
-              "description": "The current class name, if applicable."
+              "description": "The current class name, if applicable.",
+              "minLength": 1,
+              "maxLength": 255
             },
             "file": {
               "type": "string",
-              "description": "The current file path from the root of the project."
+              "description": "The current file path from the root of the project.",
+              "minLength": 1,
+              "maxLength": 255
             },
             "function": {
               "type": "string",
-              "description": "The current function name, if applicable."
+              "description": "The current function name, if applicable.",
+              "minLength": 1,
+              "maxLength": 255
             },
             "line": {
               "type": "integer",
-              "description": "The current line number with in the file."
+              "description": "The current line number with in the file.",
+              "minimum": 1
             },
             "module": {
               "type": "string",
-              "description": "The current module name, if applicable."
+              "description": "The current module name, if applicable.",
+              "minLength": 1,
+              "maxLength": 255
             },
             "vm_pid": {
               "type": "string",
-              "description": "The logical process ID as defined by the current language, if applicable."
+              "description": "The logical process ID as defined by the current language, if applicable.",
+              "minLength": 1,
+              "maxLength": 255
             }
           }
         },
         "server": {
           "type": "object",
           "description": "Metadata about the server environment.",
+          "required": ["hostname"],
           "properties": {
             "hostname": {
               "type": "string",
-              "description": "The server hostname."
+              "description": "The server hostname.",
+              "minLength": 1,
+              "maxLength": 255
             }
           }
         },
         "user": {
           "type": "object",
           "description": "Represents a user in the platform being logged. The interpretation of \"user\" is left to the consumer.",
+          "minProperties": 1,
           "parameters": {
             "id": {
               "type": "string",
-              "description": "A unique identifier for the user."
+              "description": "A unique identifier for the user.",
+              "minLength": 1,
+              "maxLength": 255
             },
             "name": {
               "type": "string",
-              "description": "A display name for the user."
+              "description": "A display name for the user.",
+              "minLength": 1,
+              "maxLength": 255
             },
             "email": {
               "type": "string",
-              "description": "An email address for the user. This need not be unique to the user. Note that no validation is performed on this field."
+              "description": "An email address for the user. This need not be unique to the user. Note that no validation is performed on this field.",
+              "pattern": "email",
+              "minLength": 1,
+              "maxLength": 255
             }
           }
         }
@@ -179,8 +220,20 @@
             "controller_call": {
               "type": "object",
               "description": "Represents the calling of a controller, typically logged immediately after the request is routed.",
+              "required": ["controller", "action"],
               "properties": {
-
+                "controller": {
+                  "type": "string",
+                  "description": "The name of the controller being called.",
+                  "minLength": 1,
+                  "maxLength": 255
+                },
+                "action": {
+                  "type": "string",
+                  "description": "The name of the controller action being called.",
+                  "minLength": 1,
+                  "maxLength": 255
+                }
               }
             },
             "exception": {
@@ -189,32 +242,44 @@
               "properties": {
                 "backtrace": {
                   "type": "array",
+                  "description": "An array of lines, representing the call stack, leading up to the exception.",
+                  "minItems": 1,
                   "maxItems": 10,
                   "items": {
                     "type": "object",
+                    "required": ["file", "function", "line"],
                     "properties": {
                       "file": {
                         "type": "string",
-                        "description": "The line file path."
+                        "description": "The line file path.",
+                        "minLength": 1,
+                        "maxLength": 255
                       },
                       "function": {
                         "type": "string",
-                        "description": "The calling function name."
+                        "description": "The calling function name.",
+                        "minLength": 1,
+                        "maxLength": 255
                       },
                       "line": {
                         "type": "integer",
-                        "description": "The calling line number."
+                        "description": "The calling line number.",
+                        "minimum": 1
                       }
                     }
                   }
                 },
                 "message": {
                   "type": "string",
-                  "description": "The message describing the exception."
+                  "description": "The message describing the exception.",
+                  "minLength": 1,
+                  "maxLength": 2000
                 },
                 "name": {
                   "type": "string",
-                  "description": "The name of the exception."
+                  "description": "The name of the exception.",
+                  "minLength": 1,
+                  "maxLength": 255
                 }
               }
             },
@@ -273,7 +338,9 @@
                   "properties": {
                     "content_type": {
                       "type": "string",
-                      "description": "The Content-Type header value"
+                      "description": "The Content-Type header value",
+                      "minLength": 1,
+                      "maxLength": 255
                     },
                     "remote_addr": {
                       "type": "string",
@@ -282,14 +349,17 @@
                     },
                     "referrer": {
                       "type": "string",
-                      "description": "The referring URL that resulted in this request."
+                      "description": "The referring URI that resulted in this request.",
+                      "pattern": "uri"
                     },
                     "request_id": {
                       "$ref": "#/definitions/request_id"
                     },
                     "user-agent": {
                       "type": "string",
-                      "description": "The client / browser / device the requestor is using to make the request."
+                      "description": "The client / browser / device the requestor is using to make the request.",
+                      "minLength": 1,
+                      "maxLength": 255
                     }
                   }
                 },
@@ -323,7 +393,9 @@
               "properties": {
                 "sql": {
                   "type": "string",
-                  "description": "The actual SQL statement sent."
+                  "description": "The actual SQL statement sent.",
+                  "minLength": 1,
+                  "maxLength": 5000
                 },
                 "time_ms": {
                   "$ref": "#/definitions/time_ms"
@@ -333,11 +405,13 @@
             "template_render": {
               "type": "object",
               "description": "Rendering a template to be sent to the client via the HTTP response.",
-              "required": ["sql", "time_ms"],
+              "required": ["name", "time_ms"],
               "properties": {
                 "name": {
                   "type": "string",
-                  "description": "The unique name of the template. This generally includes the path."
+                  "description": "The unique name of the template. This generally includes the path.",
+                  "minLength": 1,
+                  "maxLength": 255
                 },
                 "time_ms": {
                   "$ref": "#/definitions/time_ms"
@@ -357,11 +431,13 @@
             "properties": {
               "bytes": {
                 "type": "integer",
-                "description": "The size of the response, in bytes, sent back to the requestor."
+                "description": "The size of the response, in bytes, sent back to the requestor.",
+                "minimum": 0
               },
               "connect_ms": {
                 "type": "number",
-                "description": "The time, in fractional milliseconds, it took to connect to the down stream service for processing."
+                "description": "The time, in fractional milliseconds, it took to connect to the down stream service for processing.",
+                "minimum": 0
               },
               "fwd": {
                 "type": "string",
@@ -382,7 +458,8 @@
               },
               "service_ms": {
                 "type": "number",
-                "description": "The time, in fractional milliseconds, it took for the downstream service to process and respond to the request."
+                "description": "The time, in fractional milliseconds, it took for the downstream service to process and respond to the request.",
+                "minimum": 0,
               },
               "status": {
                 "$ref": "#/definitions/http_status"
@@ -396,7 +473,9 @@
   "definitions": {
     "http_host": {
       "type": "string",
-      "description": "The target host of the HTTP request. This may not be the same as the real hostname of the server."
+      "description": "The target host of the HTTP request. This may not be the same as the real hostname of the server.",
+      "minLength": 1,
+      "maxLength": 255
     },
     "http_method": {
       "type": "string",
@@ -405,15 +484,24 @@
     },
     "http_path": {
       "type": "string",
-      "description": "The path of the HTTP request."
+      "description": "The path of the HTTP request.",
+      "minLength": 1,
+      "maxLength": 2000
     },
     "http_port": {
       "type": "integer",
-      "description": "The target port of the HTTP request. This may be different than the port the server is listening on."
+      "description": "The target port of the HTTP request. This may be different than the port the server is listening on.",
+      "minimum": 0
     },
     "http_query_params": {
       "type": "object",
-      "description": "The query parameters present on the URL"
+      "description": "The query parameters present on the URL",
+      "minProperties": 1
+    },
+    "http_remote_addr": {
+      "type": "string",
+      "format": "ipv6",
+      "description": "The remote IP address who issued the HTTP request"
     },
     "http_scheme": {
       "type": "string",
@@ -428,7 +516,9 @@
     },
     "request_id": {
       "type": "string",
-      "description": "A unique identifier for the HTTP request, typically used to trace this request across services."
+      "description": "A unique identifier for the HTTP request, typically used to trace this request across services.",
+      "minLength": 1,
+      "maxLength": 255
     },
     "time_ms": {
       "type": "number",
