@@ -12,6 +12,11 @@
       "minLength": 1,
       "maxLength": 255
     },
+    "application_id": {
+      "type": "integer",
+      "description": "The application ID this log line is a member of.",
+      "minimum": 1
+    },
     "id": {
       "type": "string",
       "description": "The unique identifer for this log line. This identifier is created and assigned by Timber.",
