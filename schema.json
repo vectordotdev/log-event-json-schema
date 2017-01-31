@@ -441,7 +441,7 @@
               },
               "fwd": {
                 "type": "string",
-                "pattern": "ipv6",
+                "pattern": "ipv4",
                 "description": "The IP address of the original requestor."
               },
               "host": {
@@ -500,7 +500,7 @@
     },
     "http_remote_addr": {
       "type": "string",
-      "format": "ipv6",
+      "format": "ipv4",
       "description": "The remote IP address who issued the HTTP request"
     },
     "http_scheme": {
