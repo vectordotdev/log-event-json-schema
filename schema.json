@@ -4,6 +4,7 @@
   "title": "Timber.io Log Event Schema",
   "type": "object",
   "required": ["$schema", "id", "dt", "message"],
+  "additionalProperties": false,
   "properties": {
     "$schema": {
       "type": "string",
@@ -35,11 +36,13 @@
       "type": "object",
       "description": "Contextual metadata about the environment the event takes place in",
       "minProperties": 1,
+      "additionalProperties": false,
       "properties": {
         "http": {
           "type": "object",
           "description": "Context about the HTTP request currently being processed (if any)",
           "required": ["method", "path"],
+          "additionalProperties": false,
           "properties": {
             "method": {
               "$ref": "#/definitions/http_method"
@@ -59,6 +62,7 @@
           "type": "object",
           "description": "Represents an organization in the platform being logged. The interpretation of \"organization\" is left to the consumer.",
           "minProperties": 1,
+          "additionalProperties": false,
           "properties": {
             "id": {
               "type": "string",
@@ -78,6 +82,7 @@
           "type": "object",
           "description": "Contextual information about the hosting platform (AWS, Google Cloud, Heroku, etc) the application is hosted.",
           "minProperties": 1,
+          "additionalProperties": false,
           "properties": {
             "heroku": {
               "type": "object",
@@ -107,6 +112,7 @@
           "type": "object",
           "description": "Operating system process details.",
           "required": ["id"],
+          "additionalProperties": false,
           "properties": {
             "id": {
               "type": "string",
@@ -120,6 +126,7 @@
           "type": "object",
           "description": "Represents the language runtime details.",
           "minProperties": 1,
+          "additionalProperties": false,
           "properties": {
             "application": {
               "type": "string",
@@ -168,6 +175,7 @@
           "type": "object",
           "description": "Metadata about the server environment.",
           "required": ["hostname"],
+          "additionalProperties": false,
           "properties": {
             "hostname": {
               "type": "string",
@@ -181,6 +189,7 @@
           "type": "object",
           "description": "Represents a user in the platform being logged. The interpretation of \"user\" is left to the consumer.",
           "minProperties": 1,
+          "additionalProperties": false,
           "parameters": {
             "id": {
               "type": "string",
@@ -210,17 +219,20 @@
       "description": "A controlled representation of the event this log line represents.",
       "maxProperties": 1,
       "minProperties": 1,
+      "additionalProperties": false,
       "properties": {
         "server_side_app": {
           "type": "object",
           "description": "Namespace for all server side application events.",
           "minProperties": 1,
           "maxProperties": 1,
+          "additionalProperties": false,
           "properties": {
             "controller_call": {
               "type": "object",
               "description": "Represents the calling of a controller, typically logged immediately after the request is routed.",
               "required": ["controller", "action"],
+              "additionalProperties": false,
               "properties": {
                 "controller": {
                   "type": "string",
@@ -239,6 +251,7 @@
             "exception": {
               "type": "object",
               "required": ["backtrace", "name", "message"],
+              "additionalProperties": false,
               "properties": {
                 "backtrace": {
                   "type": "array",
@@ -248,6 +261,7 @@
                   "items": {
                     "type": "object",
                     "required": ["file", "function", "line"],
+                    "additionalProperties": false,
                     "properties": {
                       "file": {
                         "type": "string",
@@ -287,6 +301,7 @@
               "type": "object",
               "description": "Represents an outbound HTTP request from the application.",
               "required": ["method", "path", "port", "host", "scheme", "status", "time_ms"],
+              "additionalProperties": false,
               "properties": {
                 "method": {
                   "$ref": "#/definitions/http_method"
@@ -315,6 +330,7 @@
               "type": "object",
               "description": "Represents the *reception* of an inbound HTTP request that is being handled by the application.",
               "required": ["method", "path", "port", "host", "scheme"],
+              "additionalProperties": false,
               "properties": {
                 "method": {
                   "$ref": "#/definitions/http_method"
@@ -335,6 +351,7 @@
                   "type": "object",
                   "description": "A select group of headers that was sent with the request.",
                   "minProperties": 1,
+                  "additionalProperties": false,
                   "properties": {
                     "content_type": {
                       "type": "string",
@@ -372,6 +389,7 @@
               "type": "object",
               "description": "Represents the *reception* of an inbound HTTP request that is being handled by the application.",
               "required": ["status", "time_ms"],
+              "additionalProperties": false,
               "properties": {
                 "bytes": {
                   "type": "integer",
@@ -390,6 +408,7 @@
               "type": "object",
               "description": "An outgoing SQL query sent from the application.",
               "required": ["sql", "time_ms"],
+              "additionalProperties": false,
               "properties": {
                 "sql": {
                   "type": "string",
@@ -406,6 +425,7 @@
               "type": "object",
               "description": "Rendering a template to be sent to the client via the HTTP response.",
               "required": ["name", "time_ms"],
+              "additionalProperties": false,
               "properties": {
                 "name": {
                   "type": "string",
@@ -424,10 +444,12 @@
           "type": "object",
           "minProperties": 1,
           "maxProperties": 1,
+          "additionalProperties": false,
           "routing": {
             "type": "object",
             "description": "Represents the routing of an incoming HTTP request where a web server acts as a reverse proxy.",
             "required": ["bytes", "connect_ms", "host", "method", "path", "request_id", "service_ms", "status"],
+            "additionalProperties": false,
             "properties": {
               "bytes": {
                 "type": "integer",
