@@ -344,7 +344,7 @@
                     },
                     "remote_addr": {
                       "type": "string",
-                      "format": "ipv6",
+                      "format": "ipv4",
                       "description": "The value of the various headers used to determine the requestor's IP address."
                     },
                     "referrer": {
