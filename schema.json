@@ -3,7 +3,7 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Timber.io Log Event Schema",
   "type": "object",
-  "required": ["$schema", "id", "dt", "message"],
+  "required": ["$schema", "application_id", "id", "dt", "message"],
   "additionalProperties": false,
   "properties": {
     "$schema": {
