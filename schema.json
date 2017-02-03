@@ -217,7 +217,7 @@
             "email": {
               "type": "string",
               "description": "An email address for the user. This need not be unique to the user. Note that no validation is performed on this field.",
-              "pattern": "email",
+              "format": "email",
               "minLength": 1,
               "maxLength": 255
             }
@@ -542,7 +542,7 @@
               },
               "fwd": {
                 "type": "string",
-                "pattern": "ipv4",
+                "format": "ipv4",
                 "description": "The IP address of the original requestor."
               },
               "host": {
@@ -605,17 +605,17 @@
     "http_header_location": {
       "type": "string",
       "description": "The Location header value",
-      "pattern": "uri"
+      "format": "uri"
     },
     "http_header_referrer": {
       "type": "string",
       "description": "The Referrer header value",
-      "pattern": "uri"
+      "format": "uri"
     },
     "http_header_remote_addr": {
       "type": "string",
       "description": "The Remote-Addr header value",
-      "pattern": "ipv4"
+      "format": "ipv4"
     },
     "http_header_request_id": {
       "type": "string",
