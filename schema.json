@@ -62,10 +62,10 @@
               "$ref": "#/definitions/http_path"
             },
             "remote_addr": {
-              "$ref": "#/definitions/http_remote_addr"
+              "$ref": "#/definitions/http_header_remote_addr"
             },
             "request_id": {
-              "$ref": "#/definitions/request_id"
+              "$ref": "#/definitions/http_header_request_id"
             }
           }
         },
@@ -555,7 +555,7 @@
                 "$ref": "#/definitions/http_path"
               },
               "request_id": {
-                "$ref": "#/definitions/request_id"
+                "$ref": "#/definitions/http_header_request_id"
               },
               "service_ms": {
                 "type": "number",
@@ -651,11 +651,6 @@
       "description": "The query parameters present on the URL.",
       "minLength": 1,
       "maxLength": 1000
-    },
-    "http_remote_addr": {
-      "type": "string",
-      "format": "ipv4",
-      "description": "The remote IP address who issued the HTTP request."
     },
     "http_scheme": {
       "type": "string",
