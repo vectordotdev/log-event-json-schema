@@ -201,7 +201,7 @@
           "description": "Represents a user in the platform being logged. The interpretation of \"user\" is left to the consumer.",
           "minProperties": 1,
           "additionalProperties": false,
-          "parameters": {
+          "properties": {
             "id": {
               "type": "string",
               "description": "A unique identifier for the user.",
@@ -310,8 +310,8 @@
             },
             "http_client_request": {
               "type": "object",
-              "description": "Represents an outbound HTTP request from the application.",
-              "required": ["method", "path", "port", "host", "scheme", "status", "time_ms"],
+              "description": "Represents an outbound HTTP request from within the application.",
+              "required": ["method", "path", "port", "host", "scheme"],
               "additionalProperties": false,
               "properties": {
                 "headers": {
@@ -321,25 +321,16 @@
                   "additionalProperties": false,
                   "properties": {
                     "accept": {
-                      "type": "string",
-                      "description": "The Accept header value",
-                      "minLength": 1,
-                      "maxLength": 255
+                      "$ref": "#/definitions/http_header_accept"
                     },
                     "content_type": {
-                      "type": "string",
-                      "description": "The Content-Type header value",
-                      "minLength": 1,
-                      "maxLength": 255
+                      "$ref": "#/definitions/http_header_content_type"
                     },
                     "request_id": {
-                      "$ref": "#/definitions/request_id"
+                      "$ref": "#/definitions/http_header_request_id"
                     },
                     "user_agent": {
-                      "type": "string",
-                      "description": "The client / browser / device the requestor is using to make the request.",
-                      "minLength": 1,
-                      "maxLength": 255
+                      "$ref": "#/definitions/http_header_user_agent"
                     }
                   }
                 },
@@ -360,6 +351,40 @@
                 },
                 "scheme": {
                   "$ref": "#/definitions/http_scheme"
+                }
+              }
+            },
+            "http_client_response": {
+              "type": "object",
+              "description": "Represents response to an outbound HTTP request from within the application.",
+              "required": ["status", "time_ms"],
+              "additionalProperties": false,
+              "properties": {
+                "headers": {
+                  "type": "object",
+                  "description": "A select group of headers that included in the response.",
+                  "minProperties": 1,
+                  "additionalProperties": false,
+                  "properties": {
+                    "cache_control": {
+                      "$ref": "#/definitions/http_header_cache_control"
+                    },
+                    "content_disposition": {
+                      "$ref": "#/definitions/http_header_content_disposition"
+                    },
+                    "content_length": {
+                      "$ref": "#/definitions/http_header_content_length"
+                    },
+                    "content_type": {
+                      "$ref": "#/definitions/http_header_content_type"
+                    },
+                    "request_id": {
+                      "$ref": "#/definitions/http_header_request_id"
+                    },
+                    "user_agent": {
+                      "$ref": "#/definitions/http_header_user_agent"
+                    }
+                  }
                 },
                 "status": {
                   "$ref": "#/definitions/http_status"
@@ -382,29 +407,19 @@
                   "additionalProperties": false,
                   "properties": {
                     "content_type": {
-                      "type": "string",
-                      "description": "The Content-Type header value",
-                      "minLength": 1,
-                      "maxLength": 255
-                    },
-                    "remote_addr": {
-                      "type": "string",
-                      "format": "ipv4",
-                      "description": "The value of the various headers used to determine the requestor's IP address."
+                      "$ref": "#/definitions/http_header_content_type"
                     },
                     "referrer": {
-                      "type": "string",
-                      "description": "The referring URI that resulted in this request.",
-                      "pattern": "uri"
+                      "$ref": "#/definitions/http_header_referrer"
+                    },
+                    "remote_addr": {
+                      "$ref": "#/definitions/http_header_remote_addr"
                     },
                     "request_id": {
-                      "$ref": "#/definitions/request_id"
+                      "$ref": "#/definitions/http_header_request_id"
                     },
                     "user_agent": {
-                      "type": "string",
-                      "description": "The client / browser / device the requestor is using to make the request.",
-                      "minLength": 1,
-                      "maxLength": 255
+                      "$ref": "#/definitions/http_header_user_agent"
                     }
                   }
                 },
@@ -434,11 +449,6 @@
               "required": ["status", "time_ms"],
               "additionalProperties": false,
               "properties": {
-                "bytes": {
-                  "type": "integer",
-                  "minimum": 0,
-                  "description": "The size of the response in bytes."
-                },
                 "headers": {
                   "type": "object",
                   "description": "A select group of headers that was sent with the request.",
@@ -446,37 +456,22 @@
                   "additionalProperties": false,
                   "properties": {
                     "cache_control": {
-                      "type": "string",
-                      "description": "The Cache-Control header value",
-                      "minLength": 1,
-                      "maxLength": 255
+                      "$ref": "#/definitions/http_header_cache_control"
                     },
                     "content_disposition": {
-                      "type": "string",
-                      "description": "The Content-Disposition header value",
-                      "minLength": 1,
-                      "maxLength": 255
+                      "$ref": "#/definitions/http_header_content_disposition"
                     },
                     "content_length": {
-                      "type": "string",
-                      "description": "The Content-Length header value",
-                      "minLength": 1,
-                      "maxLength": 255
+                      "$ref": "#/definitions/http_header_content_length"
                     },
                     "content_type": {
-                      "type": "string",
-                      "description": "The Content-Type header value",
-                      "minLength": 1,
-                      "maxLength": 255
+                      "$ref": "#/definitions/http_header_content_type"
                     },
                     "location": {
-                      "type": "string",
-                      "description": "The Location header value.",
-                      "minLength": 1,
-                      "maxLength": 2000
+                      "$ref": "#/definitions/http_header_location"
                     },
                     "request_id": {
-                      "$ref": "#/definitions/request_id"
+                      "$ref": "#/definitions/http_header_request_id"
                     }
                   }
                 },
@@ -577,6 +572,58 @@
     }
   },
   "definitions": {
+    "http_header_accept": {
+      "type": "string",
+      "description": "The Accept header value",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "http_header_cache_control": {
+      "type": "string",
+      "description": "The Cache-Control header value",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "http_header_content_disposition": {
+      "type": "string",
+      "description": "The Content-Disposition header value",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "http_header_content_type": {
+      "type": "string",
+      "description": "The Content-Type header value",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "http_header_content_length": {
+      "type": "string",
+      "description": "The Content-Length header value",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "http_header_referrer": {
+      "type": "string",
+      "description": "The Referrer header value",
+      "pattern": "uri"
+    },
+    "http_header_remote_addr": {
+      "type": "string",
+      "description": "The Remote-Addr header value",
+      "pattern": "ipv4"
+    },
+    "http_header_request_id": {
+      "type": "string",
+      "description": "The X-Request-ID (or some other variant) header value. This uniquely identifies the request and can be used to trace requests.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "http_header_user_agent": {
+      "type": "string",
+      "description": "The User-Agent header value",
+      "minLength": 1,
+      "maxLength": 255
+    },
     "http_host": {
       "type": "string",
       "description": "The target host of the HTTP request. This may not be the same as the real hostname of the server.",
@@ -620,12 +667,6 @@
       "minimum": 100,
       "maximum": 599,
       "description": "The status as defined by the HTTP status codes."
-    },
-    "request_id": {
-      "type": "string",
-      "description": "A unique identifier for the HTTP request, typically used to trace this request across services.",
-      "minLength": 1,
-      "maxLength": 255
     },
     "time_ms": {
       "type": "number",
