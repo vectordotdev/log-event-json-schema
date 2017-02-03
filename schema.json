@@ -422,7 +422,6 @@
                 },
                 "scheme": {
                   "$ref": "#/definitions/http_scheme"
-                }
                 },
                 "query_string": {
                   "$ref": "#/definitions/http_query_string"
