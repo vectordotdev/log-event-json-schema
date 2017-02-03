@@ -311,7 +311,7 @@
             "http_client_request": {
               "type": "object",
               "description": "Represents an outbound HTTP request from within the application.",
-              "required": ["method", "path", "port", "host", "scheme"],
+              "required": ["method", "path", "port", "host", "scheme", "service_name"],
               "additionalProperties": false,
               "properties": {
                 "headers": {
@@ -348,6 +348,12 @@
                 },
                 "query_string": {
                   "$ref": "#/definitions/http_query_string"
+                },
+                "service_name": {
+                  "type": "string",
+                  "description": "A short label / name for the service you are sending the request to, ex: elasticsearch",
+                  "minLength": 1,
+                  "maxLength": 255
                 },
                 "scheme": {
                   "$ref": "#/definitions/http_scheme"
