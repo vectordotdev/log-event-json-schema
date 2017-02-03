@@ -602,6 +602,11 @@
       "minLength": 1,
       "maxLength": 255
     },
+    "http_header_location": {
+      "type": "string",
+      "description": "The Location header value",
+      "pattern": "uri"
+    },
     "http_header_referrer": {
       "type": "string",
       "description": "The Referrer header value",
