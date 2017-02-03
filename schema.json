@@ -37,6 +37,12 @@
       "enum": ["debug", "info", "warn", "error", "fatal"],
       "description": "The level of the log event message."
     },
+    "parsed_message": {
+      "type": "object",
+      "description": "Internal object used to hold structured data passed in the message itself. Clients should not send this data, Timber will automatically parse your message and place the data here.",
+      "minProperties": 1,
+      "maxProperties": 100
+    },
     "context": {
       "type": "object",
       "description": "Contextual metadata about the environment the event takes place in",
@@ -308,6 +314,38 @@
               "required": ["method", "path", "port", "host", "scheme", "status", "time_ms"],
               "additionalProperties": false,
               "properties": {
+                "headers": {
+                  "type": "object",
+                  "description": "A select group of headers that was sent with the request.",
+                  "minProperties": 1,
+                  "additionalProperties": false,
+                  "properties": {
+                    "accept": {
+                      "type": "string",
+                      "description": "The Accept header value",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "content_type": {
+                      "type": "string",
+                      "description": "The Content-Type header value",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "request_id": {
+                      "$ref": "#/definitions/request_id"
+                    },
+                    "user_agent": {
+                      "type": "string",
+                      "description": "The client / browser / device the requestor is using to make the request.",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  }
+                },
+                "host": {
+                  "$ref": "#/definitions/http_host"
+                },
                 "method": {
                   "$ref": "#/definitions/http_method"
                 },
@@ -317,8 +355,8 @@
                 "port": {
                   "$ref": "#/definitions/http_port"
                 },
-                "host": {
-                  "$ref": "#/definitions/http_host"
+                "query_string": {
+                  "$ref": "#/definitions/http_query_string"
                 },
                 "scheme": {
                   "$ref": "#/definitions/http_scheme"
@@ -337,21 +375,6 @@
               "required": ["method", "path", "port", "host", "scheme"],
               "additionalProperties": false,
               "properties": {
-                "method": {
-                  "$ref": "#/definitions/http_method"
-                },
-                "path": {
-                  "$ref": "#/definitions/http_path"
-                },
-                "port": {
-                  "$ref": "#/definitions/http_port"
-                },
-                "host": {
-                  "$ref": "#/definitions/http_host"
-                },
-                "scheme": {
-                  "$ref": "#/definitions/http_scheme"
-                },
                 "headers": {
                   "type": "object",
                   "description": "A select group of headers that was sent with the request.",
@@ -377,7 +400,7 @@
                     "request_id": {
                       "$ref": "#/definitions/request_id"
                     },
-                    "user-agent": {
+                    "user_agent": {
                       "type": "string",
                       "description": "The client / browser / device the requestor is using to make the request.",
                       "minLength": 1,
@@ -385,8 +408,24 @@
                     }
                   }
                 },
-                "query_params": {
-                  "$ref": "#/definitions/http_query_params"
+                "method": {
+                  "$ref": "#/definitions/http_method"
+                },
+                "path": {
+                  "$ref": "#/definitions/http_path"
+                },
+                "port": {
+                  "$ref": "#/definitions/http_port"
+                },
+                "host": {
+                  "$ref": "#/definitions/http_host"
+                },
+                "scheme": {
+                  "$ref": "#/definitions/http_scheme"
+                }
+                },
+                "query_string": {
+                  "$ref": "#/definitions/http_query_string"
                 }
               }
             },
@@ -400,6 +439,47 @@
                   "type": "integer",
                   "minimum": 0,
                   "description": "The size of the response in bytes."
+                },
+                "headers": {
+                  "type": "object",
+                  "description": "A select group of headers that was sent with the request.",
+                  "minProperties": 1,
+                  "additionalProperties": false,
+                  "properties": {
+                    "cache_control": {
+                      "type": "string",
+                      "description": "The Cache-Control header value",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "content_disposition": {
+                      "type": "string",
+                      "description": "The Content-Disposition header value",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "content_length": {
+                      "type": "string",
+                      "description": "The Content-Length header value",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "content_type": {
+                      "type": "string",
+                      "description": "The Content-Type header value",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "location": {
+                      "type": "string",
+                      "description": "The Location header value.",
+                      "minLength": 1,
+                      "maxLength": 2000
+                    },
+                    "request_id": {
+                      "$ref": "#/definitions/request_id"
+                    }
+                  }
                 },
                 "status": {
                   "$ref": "#/definitions/http_status"
@@ -520,15 +600,16 @@
       "description": "The target port of the HTTP request. This may be different than the port the server is listening on.",
       "minimum": 0
     },
-    "http_query_params": {
-      "type": "object",
-      "description": "The query parameters present on the URL",
-      "minProperties": 1
+    "http_query_string": {
+      "type": "string",
+      "description": "The query parameters present on the URL.",
+      "minLength": 1,
+      "maxLength": 1000
     },
     "http_remote_addr": {
       "type": "string",
       "format": "ipv4",
-      "description": "The remote IP address who issued the HTTP request"
+      "description": "The remote IP address who issued the HTTP request."
     },
     "http_scheme": {
       "type": "string",
