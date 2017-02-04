@@ -1,36 +1,43 @@
 # :evergreen_tree: Timber Log Event JSON Schema
 
-This is a formal definition of the [Timber](https://timber.io) log event JSON schema. It follows
-the [JSON Schema](http://json-schema.org/) specification.
+This is the formal definition of the [Timber](https://timber.io) log event JSON schema. It adheres
+to the [JSON Schema specification](http://json-schema.org/).
 
-The Timber log event schema is a shared, normalized schema that log events, across all platforms,
-can adhere to. It's goal is to normalize log events across *all* platforms into a predictable
-consistent schema that down stream consumers can rely on. This opens a whole world of possibilities.
-Here's an example payload:
+The Timber log event schema is a shared, normalized schema that log events can adhere to.
+It's purpose is to normalize log events across *all* platforms into a predictable
+consistent schema that down stream consumers can rely on.
+
+## HTTP Response Example JSON payload
 
 ```javascript
 {
-  "dt": "2016-12-01T02:23:12.236543Z",
-  "level": "info",
-  "message": "Completed 200 OK in 117ms (Views: 85.2ms | ActiveRecord: 25.3ms)",
-  "context": {
+  "dt": "2016-12-01T02:23:12.236543Z", // <-------- Consistent dates with nanosecond precision
+  "level": "info", // <---------------------------- Log levels in your logs!
+  "message": "Sent 200 OK in 117ms", // <---------- Human readable message preserved
+  "context": { // <-------------------------------- Context is shared across all relevant logs and acts as join data
     "http": {
       "method": "GET",
       "path": "/checkout",
       "remote_addr": "123.456.789.10",
-      "request_id": "abcd1234"
+      "request_id": "abcd1234" // <---------------- Trace your requests!
     },
-    "user": {  // <---- http://i.giphy.com/EldfH1VJdbrwY.gif
+    "user": { // <--------------------------------- Associate users with your log events!
       "id": 2,
       "name": "Ben Johnson",
       "email": "ben@johnson.com"
     }
   },
-  "event": {
-    "http_response": {
-      "status": 200,
-      "time_ms": 117
-    }
+  "event": { // <---------------------------------- Structured data for the event being logged
+    "server_side_app": {
+      "http_response": {
+        "status": 200,
+        "time_ms": 117,
+        "headers": {
+          "content_length": 894,
+          "content_type": "application/json", // <- Data that wasn't in the log line itself
+          "request_id": "gy23fbty523"
+        }
+      }
   }
 }
 ```
