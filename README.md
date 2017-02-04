@@ -3,9 +3,9 @@
 This is a formal definition of the [Timber](https://timber.io) log event JSON schema. It follows
 the [JSON Schema](http://json-schema.org/) specification.
 
-The Timber log event schema is a shared, normalized schema that all of our log events adhere to.
-It's goal is to normalize log events across *all* platforms into a predictable consistent
-schema that down stream consumers can rely on. This opens a whole world of possibilities.
+The Timber log event schema is a shared, normalized schema that log events, across all platforms,
+can adhere to. It's goal is to normalize log events across *all* platforms into a predictable
+consistent schema that down stream consumers can rely on. This opens a whole world of possibilities.
 Here's an example payload:
 
 ```javascript
@@ -39,6 +39,7 @@ Here's an example payload:
 
 Timber follows the [semver](http://semver.org/) specification for versioning. Releases can
 be found in the [releases](https://github.com/timberio/log-event-json-schema/releases) sections.
+You can also watch this repo to be notified of any upcoming changes.
 
 ## Backwards compatibility
 
