@@ -1,13 +1,55 @@
 # Timber Log Event JSON Schema
 
-This is a formal definition of the [Timber](https://timber.io) log event JSON schema as defined
-by the [JSON Schema](http://json-schema.org/) specification. All modifications to the schema will
-be submitted through pull requests and tagged as releases.
+This is a formal definition of the [Timber](https://timber.io) log event JSON schema. It follows
+the [JSON Schema](http://json-schema.org/) specification.
 
-You can use this schema as a complete representation of Timber's normalized log event schema.
+The Timber log event schema is a shared, normalized schema that all of our log events adhere to.
+It's goal is to normalize log events across *all* platforms into a predictable consistent
+schema that down stream consumers can rely on. This opens a whole world of possibilities.
+Here's an example payload:
 
-As an aside, we use this schema internally for incoming log validation. As a result, it will
-be maintained and up to date.
+```javascript
+{
+  "dt": "2016-12-01T02:23:12.236543Z",
+  "level": "info",
+  "message": "Completed 200 OK in 117ms (Views: 85.2ms | ActiveRecord: 25.3ms)",
+  "context": {
+    "http": {
+      "method": "GET",
+      "path": "/checkout",
+      "remote_addr": "123.456.789.10",
+      "request_id": "abcd1234"
+    },
+    "user": {  // <---- http://i.giphy.com/EldfH1VJdbrwY.gif
+      "id": 2,
+      "name": "Ben Johnson",
+      "email": "ben@johnson.com"
+    }
+  },
+  "event": {
+    "http_response": {
+      "status": 200,
+      "time_ms": 117
+    }
+  }
+}
+```
+
+## Releases
+
+Timber follows the [semver](http://semver.org/) specification for versioning. Releases can
+be found in the [releases](https://github.com/timberio/log-event-json-schema/releases) sections.
+
+## Backwards compatibility
+
+The Timber API will respect legacy versions. Simply sepcify the version in the `$schema` attribute
+and we'll handle the rest.
+
+## Clients
+
+It's rare that anyone will have to create this payload theirselves. Please checkout out our
+[language specific libraries](https://github.com/timberio) as they handle capturing and structuring
+log events from within your application.
 
 ## Contributing
 
