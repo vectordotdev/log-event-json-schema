@@ -1,4 +1,4 @@
-# Timber Log Event JSON Schema
+# :evergreen_tree: Timber Log Event JSON Schema
 
 This is a formal definition of the [Timber](https://timber.io) log event JSON schema. It follows
 the [JSON Schema](http://json-schema.org/) specification.
