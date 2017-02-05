@@ -215,9 +215,6 @@ Cloud Functions.
   }
 }
 ```
-
-**5. ...and many more, checkout the schema for a complete list.
-
 </p></details>
 
 <details><summary><strong>6. Platform Error</strong></summary><p>
@@ -255,6 +252,8 @@ is external to your application. For example, [all of the Heroku errors](https:/
 ```
 
 </p></details>
+
+**7. ...and many more, checkout the schema for a complete list.
 
 
 ## Releases
