@@ -7,7 +7,8 @@ The Timber log event schema is a shared, normalized schema that log events can a
 It's purpose is to normalize log events across *all* platforms into a predictable
 consistent schema that down stream consumers can rely on.
 
-# Examples
+
+## Examples
 
 <details><summary><strong>1. Exception</strong></summary><p>
 
@@ -183,22 +184,31 @@ consistent schema that down stream consumers can rely on.
 
 </p></details>
 
+
 ## Releases
 
 Timber follows the [semver](http://semver.org/) specification for versioning. Releases can
 be found in the [releases](https://github.com/timberio/log-event-json-schema/releases) sections.
 You can also watch this repo to be notified of any upcoming changes.
 
+
 ## Backwards compatibility
 
 The Timber API will respect legacy versions. Simply sepcify the version in the `$schema` attribute
 and we'll handle the rest.
 
-## Clients
+
+## Validation
+
+Data can be validated against the schema using any of [these open source validators](http://json-schema.org/implementations.html).
+
+
+## The Timber Clients
 
 It's rare that anyone will have to create this payload theirselves. Please checkout out our
 [language specific libraries](https://github.com/timberio) as they handle capturing and structuring
 log events from within your application.
+
 
 ## Contributing
 
