@@ -17,7 +17,7 @@ A normalized event that represents an exception from within an application.
 ```javascript
 {
   "dt": "2016-12-01T02:23:12.236543Z", // Consistent dates with nanosecond precision
-  "level": "info", // Log levels in your logs!
+  "level": "error", // Log levels in your logs!
   "message": "(RuntimeError) MissingClass is undefined", // Human readable message preserved
   "context": { // Context is shared across all relevant logs and acts as join data
     "http": {
@@ -190,7 +190,9 @@ A normalized event that represents an outgoing SQL query from within an applicat
 }
 ```
 
-<details><summary><strong>4. Serverless Platform Function Invocation</strong></summary><p>
+</p></details>
+
+<details><summary><strong>5. Serverless Platform Function Invocation</strong></summary><p>
 
 A normalized event that represents function invocations on platforms like AWS Lambda or Google
 Cloud Functions.
@@ -215,6 +217,42 @@ Cloud Functions.
 ```
 
 **5. ...and many more, checkout the schema for a complete list.
+
+</p></details>
+
+<details><summary><strong>6. Platform Error</strong></summary><p>
+
+A normalized event that represents fan error on the platform the application resides. This
+is external to your application. For example, [all of the Heroku errors](https://devcenter.heroku.com/articles/error-codes).
+
+```javascript
+{
+  "dt": "2016-12-01T02:23:12.236543Z", // Consistent dates with nanosecond precision
+  "level": "error", // Log levels in your logs!
+  "message": "at=error code=H99 desc="Platform error" method=GET path="/" host=myapp.herokuapp.com fwd=17.17.17.17 dyno= connect= service= status=503 bytes=", // Human readable message preserved
+  "context": {
+    "http": {
+      "method": "GET",
+      "path": "/",
+      "host": "myapp.herokuapp.com",
+      "remove_addr": "123.34.22.34",
+      "request_id": "x1235"
+    }
+  },
+  "event": { // Structured data for the event being logged
+    "server_side_platform": { // Top level "domain" for events
+      "error": { // Event type
+        "code": "H99",
+        "message": "Platform error",
+        "billed_duration_ms": 300,
+        "memory_size_mb": 256,
+        "memory_used_mb": 118,
+        "http_status": 503
+      }
+    }
+  }
+}
+```
 
 </p></details>
 
