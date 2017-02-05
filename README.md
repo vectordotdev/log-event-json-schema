@@ -67,6 +67,8 @@ consistent schema that down stream consumers can rely on.
 }
 ```
 
+</p></details>
+
 <details><summary><strong>2. Incoming HTTP Server Request</strong></summary><p>
 
 ```javascript
