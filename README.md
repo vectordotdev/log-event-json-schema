@@ -12,6 +12,8 @@ consistent schema that down stream consumers can rely on.
 
 <details><summary><strong>1. Exception</strong></summary><p>
 
+A normalized event that represents an exception from within an application.
+
 ```javascript
 {
   "dt": "2016-12-01T02:23:12.236543Z", // Consistent dates with nanosecond precision
@@ -72,6 +74,8 @@ consistent schema that down stream consumers can rely on.
 
 <details><summary><strong>2. Incoming HTTP Server Request</strong></summary><p>
 
+A normalized event that represents an incoming HTTP request within an application.
+
 ```javascript
 {
   "dt": "2016-12-01T02:23:12.236543Z", // Consistent dates with nanosecond precision
@@ -115,6 +119,8 @@ consistent schema that down stream consumers can rely on.
 
 <details><summary><strong>3. Outgoing HTTP Server Response</strong></summary><p>
 
+A normalized event that represents an outgoing HTTP response within an application.
+
 ```javascript
 {
   "dt": "2016-12-01T02:23:12.236543Z", // Consistent dates with nanosecond precision
@@ -153,6 +159,8 @@ consistent schema that down stream consumers can rely on.
 
 <details><summary><strong>4. SQL Query</strong></summary><p>
 
+A normalized event that represents an outgoing SQL query from within an application.
+
 ```javascript
 {
   "dt": "2016-12-01T02:23:12.236543Z", // Consistent dates with nanosecond precision
@@ -181,6 +189,32 @@ consistent schema that down stream consumers can rely on.
   }
 }
 ```
+
+<details><summary><strong>4. Serverless Platform Function Invocation</strong></summary><p>
+
+A normalized event that represents function invocations on platforms like AWS Lambda or Google
+Cloud Functions.
+
+```javascript
+{
+  "dt": "2016-12-01T02:23:12.236543Z", // Consistent dates with nanosecond precision
+  "level": "info", // Log levels in your logs!
+  "message": "REPORT RequestId: 86792069-eb43-11e6-af8c-d9dfd5859e88  Duration: 236.83 ms Billed Duration: 300 ms Memory Size: 256 MB Max Memory Used: 118 MB", // Human readable message preserved
+  "event": { // Structured data for the event being logged
+    "serverless_platform": { // Top level "domain" for events
+      "function_invocation": { // Event type
+        "request_id": "86792069-eb43-11e6-af8c-d9dfd5859e88",
+        "time_ms": 236.83,
+        "billed_duration_ms": 300,
+        "memory_size_mb": 256,
+        "memory_used_mb": 118
+      }
+    }
+  }
+}
+```
+
+**5. ...and many more, checkout the schema for a complete list.
 
 </p></details>
 
