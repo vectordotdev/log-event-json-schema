@@ -253,7 +253,7 @@ is external to your application. For example, [all of the Heroku errors](https:/
 
 </p></details>
 
-**7. ...and many more, checkout the schema for a complete list.
+<strong>7. ...and many more, checkout the schema for a complete list.</strong>
 
 
 ## Releases
