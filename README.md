@@ -28,13 +28,13 @@ consistent schema that down stream consumers can rely on.
     }
   },
   "event": { // <---------------------------------- Structured data for the event being logged
-    "server_side_app": {
-      "http_response": {
+    "server_side_app": { // <---------------------- Top level "domain" for events
+      "http_response": { // <---------------------- Event type
         "status": 200,
         "time_ms": 117,
         "headers": {
           "content_length": 894,
-          "content_type": "application/json", // <- Data that wasn't in the log line itself
+          "content_type": "application/json", // <- Example of data that wasn't in the log line itself
           "request_id": "gy23fbty523"
         }
       }
