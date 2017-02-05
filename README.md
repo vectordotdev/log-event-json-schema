@@ -1,7 +1,7 @@
 # :evergreen_tree: Timber Log Event JSON Schema
 
-This is the formal definition of the [Timber](https://timber.io) log event JSON schema. It adheres
-to the [JSON Schema specification](http://json-schema.org/).
+[Schema.json](schema.json) is the formal definition of the [Timber](https://timber.io) log event
+JSON schema. It adheres to the [JSON Schema specification](http://json-schema.org/).
 
 The Timber log event schema is a shared, normalized schema that log events can adhere to.
 It's purpose is to normalize log events across *all* platforms into a predictable
