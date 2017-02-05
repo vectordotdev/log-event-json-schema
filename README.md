@@ -7,29 +7,132 @@ The Timber log event schema is a shared, normalized schema that log events can a
 It's purpose is to normalize log events across *all* platforms into a predictable
 consistent schema that down stream consumers can rely on.
 
-## HTTP Response Example JSON payload
+# Examples
+
+<details><summary><strong>1. Exception</strong></summary><p>
 
 ```javascript
 {
-  "dt": "2016-12-01T02:23:12.236543Z", // <-------- Consistent dates with nanosecond precision
-  "level": "info", // <---------------------------- Log levels in your logs!
-  "message": "Sent 200 OK in 117ms", // <---------- Human readable message preserved
-  "context": { // <-------------------------------- Context is shared across all relevant logs and acts as join data
+  "dt": "2016-12-01T02:23:12.236543Z", // Consistent dates with nanosecond precision
+  "level": "info", // Log levels in your logs!
+  "message": "(RuntimeError) MissingClass is undefined", // Human readable message preserved
+  "context": { // Context is shared across all relevant logs and acts as join data
     "http": {
       "method": "GET",
       "path": "/checkout",
       "remote_addr": "123.456.789.10",
-      "request_id": "abcd1234" // <---------------- Trace your requests!
+      "request_id": "abcd1234" // Trace your requests!
     },
-    "user": { // <--------------------------------- Associate users with your log events!
+    "user": { // Associate users with your log events!
       "id": 2,
       "name": "Ben Johnson",
       "email": "ben@johnson.com"
     }
   },
-  "event": { // <---------------------------------- Structured data for the event being logged
-    "server_side_app": { // <---------------------- Top level "domain" for events
-      "http_response": { // <---------------------- Event type
+  "event": { // Structured data for the event being logged
+    "server_side_app": { // Top level "domain" for events
+      "exception": { // Event type
+        "name": "RuntimeError",
+        "message": "MissingClass is undefined",
+        "backtrace": [
+          {
+            "file": "/path/to/file",
+            "function": "myFunc",
+            "line": 45
+          },
+          {
+            "file": "/path/to/file",
+            "function": "myFunc",
+            "line": 45
+          },
+          {
+            "file": "/path/to/file",
+            "function": "myFunc",
+            "line": 45
+          },
+          {
+            "file": "/path/to/file",
+            "function": "myFunc",
+            "line": 45
+          },
+          {
+            "file": "/path/to/file",
+            "function": "myFunc",
+            "line": 45
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+<details><summary><strong>2. Incoming HTTP Server Request</strong></summary><p>
+
+```javascript
+{
+  "dt": "2016-12-01T02:23:12.236543Z", // Consistent dates with nanosecond precision
+  "level": "info", // Log levels in your logs!
+  "message": "POST /checkout for 192.321.22.21", // Human readable message preserved
+  "context": { // Context is shared across all relevant logs and acts as join data
+    "http": {
+      "method": "GET",
+      "path": "/checkout",
+      "remote_addr": "123.456.789.10",
+      "request_id": "abcd1234" // Trace your requests!
+    },
+    "user": { // Associate users with your log events!
+      "id": 2,
+      "name": "Ben Johnson",
+      "email": "ben@johnson.com"
+    }
+  },
+  "event": { // Structured data for the event being logged
+    "server_side_app": { // Top level "domain" for events
+      "http_server_request": { // Event type
+        "method": "GET",
+        "scheme": "https",
+        "host": "timber.io",
+        "path": "/checkout",
+        "port": 443,
+        "headers": {
+          "content_length": 894,
+          "content_type": "application/json", // <- Example of data that wasn't in the log line itself
+          "remove_addr": "192.321.22.21",
+          "request_id": "gy23fbty523",
+          "user_agent": "Mozilla/3.0 (Win95; U)"
+        }
+      }
+    }
+  }
+}
+```
+
+</p></details>
+
+<details><summary><strong>3. Outgoing HTTP Server Response</strong></summary><p>
+
+```javascript
+{
+  "dt": "2016-12-01T02:23:12.236543Z", // Consistent dates with nanosecond precision
+  "level": "info", // Log levels in your logs!
+  "message": "Sent 200 OK in 117ms", // Human readable message preserved
+  "context": { // Context is shared across all relevant logs and acts as join data
+    "http": {
+      "method": "GET",
+      "path": "/checkout",
+      "remote_addr": "123.456.789.10",
+      "request_id": "abcd1234" // Trace your requests!
+    },
+    "user": { // Associate users with your log events!
+      "id": 2,
+      "name": "Ben Johnson",
+      "email": "ben@johnson.com"
+    }
+  },
+  "event": { // Structured data for the event being logged
+    "server_side_app": { // Top level "domain" for events
+      "http_server_response": { // Event type
         "status": 200,
         "time_ms": 117,
         "headers": {
@@ -38,9 +141,45 @@ consistent schema that down stream consumers can rely on.
           "request_id": "gy23fbty523"
         }
       }
+    }
   }
 }
 ```
+
+</p></details>
+
+<details><summary><strong>4. SQL Query</strong></summary><p>
+
+```javascript
+{
+  "dt": "2016-12-01T02:23:12.236543Z", // Consistent dates with nanosecond precision
+  "level": "info", // Log levels in your logs!
+  "message": "SELECT * FROM users WHERE id = 1 (54ms)", // Human readable message preserved
+  "context": { // Context is shared across all relevant logs and acts as join data
+    "http": {
+      "method": "GET",
+      "path": "/checkout",
+      "remote_addr": "123.456.789.10",
+      "request_id": "abcd1234" // Trace your requests!
+    },
+    "user": { // Associate users with your log events!
+      "id": 2,
+      "name": "Ben Johnson",
+      "email": "ben@johnson.com"
+    }
+  },
+  "event": { // Structured data for the event being logged
+    "server_side_app": { // Top level "domain" for events
+      "sql_query": { // Event type
+        "sql": "SELECT * FROM users WHERE id = 1",
+        "time_ms": 54
+      }
+    }
+  }
+}
+```
+
+</p></details>
 
 ## Releases
 
