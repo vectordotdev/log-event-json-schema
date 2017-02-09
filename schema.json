@@ -119,13 +119,13 @@
             }
           }
         },
-        "process": {
+        "os_process": {
           "type": "object",
           "description": "Operating system process details.",
-          "required": ["id"],
+          "required": ["pid"],
           "additionalProperties": false,
           "properties": {
-            "id": {
+            "pid": {
               "type": "string",
               "description": "The current operating system process ID as defined by the `pid` command in Unix.",
               "minLength": 1,
@@ -145,7 +145,7 @@
               "minLength": 1,
               "maxLength": 255
             },
-            "class": {
+            "class_name": {
               "type": "string",
               "description": "The current class name, if applicable.",
               "minLength": 1,
@@ -168,7 +168,7 @@
               "description": "The current line number with in the file.",
               "minimum": 1
             },
-            "module": {
+            "module_name": {
               "type": "string",
               "description": "The current module name, if applicable.",
               "minLength": 1,
