@@ -119,9 +119,9 @@
             }
           }
         },
-        "os_process": {
+        "system": {
           "type": "object",
-          "description": "Operating system process details.",
+          "description": "Operating system details.",
           "required": ["pid"],
           "additionalProperties": false,
           "properties": {
