@@ -28,14 +28,19 @@
       "format": "date-time",
       "description": "The date and time at which the log event was generated as a string of the form YYYY-MM-DDTHH:MM:SS.SSSSSSZ"
     },
-    "message": {
-      "type": "string",
-      "description": "The log event message",
-      "maxLength": 50000
-    },
     "level": {
       "enum": ["debug", "info", "warn", "error", "fatal"],
       "description": "The level of the log event message."
+    },
+    "message": {
+      "type": "string",
+      "description": "The raw log event message, formatting stripped.",
+      "maxLength": 50000
+    },
+    "formatted_message": {
+      "type": "string",
+      "description": "The log event message, formatting preserved.",
+      "maxLength": 50000
     },
     "parsed_message": {
       "type": "object",
