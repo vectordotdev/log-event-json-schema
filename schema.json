@@ -48,6 +48,15 @@
       "minProperties": 1,
       "maxProperties": 100
     },
+    "tags": {
+      "type": "array",
+      "description": "An array of tags to be associated with this log line.",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "string"
+      }
+    },
     "context": {
       "type": "object",
       "description": "Contextual metadata about the environment the event takes place in",
