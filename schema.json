@@ -57,6 +57,9 @@
         "type": "string"
       }
     },
+    "time_ms": {
+      "$ref": "#/definitions/time_ms"
+    },
     "context": {
       "type": "object",
       "description": "Contextual metadata about the environment the event takes place in",
@@ -133,20 +136,6 @@
             }
           }
         },
-        "system": {
-          "type": "object",
-          "description": "Operating system details.",
-          "required": ["pid"],
-          "additionalProperties": false,
-          "properties": {
-            "pid": {
-              "type": "string",
-              "description": "The current operating system process ID as defined by the `pid` command in Unix.",
-              "minLength": 1,
-              "maxLength": 255
-            }
-          }
-        },
         "runtime": {
           "type": "object",
           "description": "Represents the language runtime details.",
@@ -205,6 +194,20 @@
             "hostname": {
               "type": "string",
               "description": "The server hostname.",
+              "minLength": 1,
+              "maxLength": 255
+            }
+          }
+        },
+        "system": {
+          "type": "object",
+          "description": "Operating system details.",
+          "required": ["pid"],
+          "additionalProperties": false,
+          "properties": {
+            "pid": {
+              "type": "string",
+              "description": "The current operating system process ID as defined by the `pid` command in Unix.",
               "minLength": 1,
               "maxLength": 255
             }
