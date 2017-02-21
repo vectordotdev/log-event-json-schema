@@ -66,6 +66,9 @@
       "minProperties": 1,
       "additionalProperties": false,
       "properties": {
+        "custom": {
+          "$ref": "#/definitions/custom"
+        },
         "http": {
           "type": "object",
           "description": "Context about the HTTP request currently being processed (if any)",
@@ -249,6 +252,9 @@
       "minProperties": 1,
       "additionalProperties": false,
       "properties": {
+        "custom": {
+          "$ref": "#/definitions/custom"
+        },
         "server_side_app": {
           "type": "object",
           "description": "Namespace for all server side application events.",
@@ -595,6 +601,22 @@
     }
   },
   "definitions": {
+    "custom": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "minProperties": 1,
+        "maxProperties": 20,
+        "additionalProperties": {
+          "type": "object",
+          "minProperties": 1,
+          "maxProperties": 20,
+          "additionalProperties": false
+        }
+      }
+    },
     "http_header_accept": {
       "type": "string",
       "description": "The Accept header value",
