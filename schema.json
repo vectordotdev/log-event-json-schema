@@ -610,7 +610,6 @@
         "minProperties": 1,
         "maxProperties": 20,
         "additionalProperties": {
-          "type": "object",
           "minProperties": 1,
           "maxProperties": 20,
           "additionalProperties": false
