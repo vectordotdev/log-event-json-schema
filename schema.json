@@ -612,7 +612,11 @@
         "additionalProperties": {
           "minProperties": 1,
           "maxProperties": 20,
-          "additionalProperties": false
+          "additionalProperties": {
+            "minProperties": 1,
+            "maxProperties": 20,
+            "additionalProperties": false
+          }
         }
       }
     },
