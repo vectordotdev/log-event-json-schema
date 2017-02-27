@@ -740,7 +740,8 @@
     "http_header_remote_addr": {
       "type": "string",
       "description": "The Remote-Addr header value",
-      "format": "ipv4"
+      "minLength": 1,
+      "maxLength": 255
     },
     "http_header_request_id": {
       "type": "string",
