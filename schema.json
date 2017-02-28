@@ -764,7 +764,7 @@
     "http_method": {
       "type": "string",
       "description": "The HTTP method for the request.",
-      "enum": ["CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "POST", "PUT", "TRACE"]
+      "enum": ["CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"]
     },
     "http_path": {
       "type": "string",
