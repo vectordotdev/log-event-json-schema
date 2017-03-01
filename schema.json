@@ -753,7 +753,7 @@
       "type": "string",
       "description": "The User-Agent header value",
       "minLength": 1,
-      "maxLength": 255
+      "maxLength": 1000
     },
     "http_host": {
       "type": "string",
