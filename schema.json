@@ -304,6 +304,12 @@
                     "required": ["file", "function", "line"],
                     "additionalProperties": false,
                     "properties": {
+                      "app_name": {
+                        "type": "string",
+                        "description": "Application name, if applicable. For example, erlang / elixir have multiple apps within the same umbrella project.",
+                        "minLength": 1,
+                        "maxLength": 255
+                      },
                       "file": {
                         "type": "string",
                         "description": "The line file path.",
