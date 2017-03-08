@@ -82,10 +82,10 @@
               "$ref": "#/definitions/http_path"
             },
             "remote_addr": {
-              "$ref": "#/definitions/http_header_remote_addr"
+              "$ref": "#/definitions/http_remote_addr"
             },
             "request_id": {
-              "$ref": "#/definitions/http_header_request_id"
+              "$ref": "#/definitions/http_request_id"
             }
           }
         },
@@ -350,6 +350,9 @@
               "required": ["method", "path", "port", "host", "scheme", "service_name"],
               "additionalProperties": false,
               "properties": {
+                "body": {
+                  "$ref": "#/definitions/http_body"
+                },
                 "headers": {
                   "$ref": "#/definitions/http_headers"
                 },
@@ -367,6 +370,9 @@
                 },
                 "query_string": {
                   "$ref": "#/definitions/http_query_string"
+                },
+                "request_id": {
+                  "$ref": "#/definitions/http_request_id"
                 },
                 "service_name": {
                   "type": "string",
@@ -391,6 +397,9 @@
                 "status": {
                   "$ref": "#/definitions/http_status"
                 },
+                "request_id": {
+                  "$ref": "#/definitions/http_request_id"
+                },
                 "time_ms": {
                   "$ref": "#/definitions/time_ms"
                 }
@@ -402,6 +411,9 @@
               "required": ["method", "path", "port", "host", "scheme"],
               "additionalProperties": false,
               "properties": {
+                "body": {
+                  "$ref": "#/definitions/http_body"
+                },
                 "headers": {
                   "$ref": "#/definitions/http_headers"
                 },
@@ -417,6 +429,9 @@
                 "host": {
                   "$ref": "#/definitions/http_host"
                 },
+                "request_id": {
+                  "$ref": "#/definitions/http_request_id"
+                },
                 "scheme": {
                   "$ref": "#/definitions/http_scheme"
                 },
@@ -431,8 +446,14 @@
               "required": ["status", "time_ms"],
               "additionalProperties": false,
               "properties": {
+                "body": {
+                  "$ref": "#/definitions/http_body"
+                },
                 "headers": {
                   "$ref": "#/definitions/http_headers"
+                },
+                "request_id": {
+                  "$ref": "#/definitions/http_request_id"
                 },
                 "status": {
                   "$ref": "#/definitions/http_status"
@@ -583,7 +604,7 @@
                   "$ref": "#/definitions/http_path"
                 },
                 "request_id": {
-                  "$ref": "#/definitions/http_header_request_id"
+                  "$ref": "#/definitions/http_request_id"
                 },
                 "service_ms": {
                   "type": "number",
@@ -620,17 +641,11 @@
         }
       }
     },
-    "http_header_remote_addr": {
+    "http_body": {
       "type": "string",
-      "description": "The Remote-Addr header value",
+      "description": "The body of the HTTP request / response.",
       "minLength": 1,
-      "maxLength": 255
-    },
-    "http_header_request_id": {
-      "type": "string",
-      "description": "The X-Request-ID (or some other variant) header value. This uniquely identifies the request and can be used to trace requests.",
-      "minLength": 1,
-      "maxLength": 255
+      "maxLength": 2000
     },
     "http_headers": {
       "type": "object",
@@ -670,6 +685,18 @@
       "description": "The query parameters present on the URL.",
       "minLength": 1,
       "maxLength": 1000
+    },
+    "http_remote_addr": {
+      "type": "string",
+      "description": "The IP address of the computer that issued the request.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "http_request_id": {
+      "type": "string",
+      "description": "An ID that uniquely identifies the request and can be used to trace requests.",
+      "minLength": 1,
+      "maxLength": 255
     },
     "http_scheme": {
       "type": "string",
