@@ -351,24 +351,7 @@
               "additionalProperties": false,
               "properties": {
                 "headers": {
-                  "type": "object",
-                  "description": "A select group of headers that was sent with the request.",
-                  "minProperties": 1,
-                  "additionalProperties": false,
-                  "properties": {
-                    "accept": {
-                      "$ref": "#/definitions/http_header_accept"
-                    },
-                    "content_type": {
-                      "$ref": "#/definitions/http_header_content_type"
-                    },
-                    "request_id": {
-                      "$ref": "#/definitions/http_header_request_id"
-                    },
-                    "user_agent": {
-                      "$ref": "#/definitions/http_header_user_agent"
-                    }
-                  }
+                  "$ref": "#/definitions/http_headers"
                 },
                 "host": {
                   "$ref": "#/definitions/http_host"
@@ -403,30 +386,7 @@
               "additionalProperties": false,
               "properties": {
                 "headers": {
-                  "type": "object",
-                  "description": "A select group of headers that included in the response.",
-                  "minProperties": 1,
-                  "additionalProperties": false,
-                  "properties": {
-                    "cache_control": {
-                      "$ref": "#/definitions/http_header_cache_control"
-                    },
-                    "content_disposition": {
-                      "$ref": "#/definitions/http_header_content_disposition"
-                    },
-                    "content_length": {
-                      "$ref": "#/definitions/http_header_content_length"
-                    },
-                    "content_type": {
-                      "$ref": "#/definitions/http_header_content_type"
-                    },
-                    "request_id": {
-                      "$ref": "#/definitions/http_header_request_id"
-                    },
-                    "user_agent": {
-                      "$ref": "#/definitions/http_header_user_agent"
-                    }
-                  }
+                  "$ref": "#/definitions/http_headers"
                 },
                 "status": {
                   "$ref": "#/definitions/http_status"
@@ -443,27 +403,7 @@
               "additionalProperties": false,
               "properties": {
                 "headers": {
-                  "type": "object",
-                  "description": "A select group of headers that was sent with the request.",
-                  "minProperties": 1,
-                  "additionalProperties": false,
-                  "properties": {
-                    "content_type": {
-                      "$ref": "#/definitions/http_header_content_type"
-                    },
-                    "referrer": {
-                      "$ref": "#/definitions/http_header_referrer"
-                    },
-                    "remote_addr": {
-                      "$ref": "#/definitions/http_header_remote_addr"
-                    },
-                    "request_id": {
-                      "$ref": "#/definitions/http_header_request_id"
-                    },
-                    "user_agent": {
-                      "$ref": "#/definitions/http_header_user_agent"
-                    }
-                  }
+                  "$ref": "#/definitions/http_headers"
                 },
                 "method": {
                   "$ref": "#/definitions/http_method"
@@ -492,30 +432,7 @@
               "additionalProperties": false,
               "properties": {
                 "headers": {
-                  "type": "object",
-                  "description": "A select group of headers that was sent with the request.",
-                  "minProperties": 1,
-                  "additionalProperties": false,
-                  "properties": {
-                    "cache_control": {
-                      "$ref": "#/definitions/http_header_cache_control"
-                    },
-                    "content_disposition": {
-                      "$ref": "#/definitions/http_header_content_disposition"
-                    },
-                    "content_length": {
-                      "$ref": "#/definitions/http_header_content_length"
-                    },
-                    "content_type": {
-                      "$ref": "#/definitions/http_header_content_type"
-                    },
-                    "location": {
-                      "$ref": "#/definitions/http_header_location"
-                    },
-                    "request_id": {
-                      "$ref": "#/definitions/http_header_request_id"
-                    }
-                  }
+                  "$ref": "#/definitions/http_headers"
                 },
                 "status": {
                   "$ref": "#/definitions/http_status"
@@ -703,46 +620,6 @@
         }
       }
     },
-    "http_header_accept": {
-      "type": "string",
-      "description": "The Accept header value",
-      "minLength": 1,
-      "maxLength": 255
-    },
-    "http_header_cache_control": {
-      "type": "string",
-      "description": "The Cache-Control header value",
-      "minLength": 1,
-      "maxLength": 255
-    },
-    "http_header_content_disposition": {
-      "type": "string",
-      "description": "The Content-Disposition header value",
-      "minLength": 1,
-      "maxLength": 255
-    },
-    "http_header_content_type": {
-      "type": "string",
-      "description": "The Content-Type header value",
-      "minLength": 1,
-      "maxLength": 255
-    },
-    "http_header_content_length": {
-      "type": "string",
-      "description": "The Content-Length header value",
-      "minLength": 1,
-      "maxLength": 255
-    },
-    "http_header_location": {
-      "type": "string",
-      "description": "The Location header value",
-      "format": "uri"
-    },
-    "http_header_referrer": {
-      "type": "string",
-      "description": "The Referrer header value",
-      "format": "uri"
-    },
     "http_header_remote_addr": {
       "type": "string",
       "description": "The Remote-Addr header value",
@@ -755,11 +632,16 @@
       "minLength": 1,
       "maxLength": 255
     },
-    "http_header_user_agent": {
-      "type": "string",
-      "description": "The User-Agent header value",
-      "minLength": 1,
-      "maxLength": 1000
+    "http_headers": {
+      "type": "object",
+      "description": "An object representing HTTP headers.",
+      "minProperties": 1,
+      "maxProperties": 50,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": "1",
+        "maxLength": "255"
+      }
     },
     "http_host": {
       "type": "string",
