@@ -1,4 +1,3 @@
-
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Timber.io Log Event Schema",
@@ -651,12 +650,7 @@
       "type": "object",
       "description": "An object representing HTTP headers.",
       "minProperties": 1,
-      "maxProperties": 50,
-      "additionalProperties": {
-        "type": "string",
-        "minLength": "1",
-        "maxLength": "255"
-      }
+      "maxProperties": 50
     },
     "http_host": {
       "type": "string",
