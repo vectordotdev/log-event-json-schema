@@ -390,6 +390,9 @@
               "required": ["status", "time_ms"],
               "additionalProperties": false,
               "properties": {
+                "body": {
+                  "$ref": "#/definitions/http_body"
+                },
                 "headers": {
                   "$ref": "#/definitions/http_headers"
                 },
