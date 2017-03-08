@@ -651,12 +651,7 @@
       "type": "object",
       "description": "An object representing HTTP headers.",
       "minProperties": 1,
-      "maxProperties": 50,
-      "additionalProperties": {
-        "minLength": "1",
-        "maxLength": "255",
-        "additionalProperties": false
-      }
+      "maxProperties": 50
     },
     "http_host": {
       "type": "string",
