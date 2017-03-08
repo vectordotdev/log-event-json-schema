@@ -655,7 +655,8 @@
       "additionalProperties": {
         "type": "string",
         "minLength": "1",
-        "maxLength": "255"
+        "maxLength": "255",
+        "additionalProperties": false
       }
     },
     "http_host": {
