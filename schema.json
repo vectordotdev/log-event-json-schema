@@ -374,10 +374,7 @@
                   "$ref": "#/definitions/http_request_id"
                 },
                 "service_name": {
-                  "type": "string",
-                  "description": "A short label / name for the service you are sending the request to, ex: elasticsearch",
-                  "minLength": 1,
-                  "maxLength": 255
+                  "$ref": "#/definitions/http_service_name"
                 },
                 "scheme": {
                   "$ref": "#/definitions/http_scheme"
@@ -401,6 +398,9 @@
                 },
                 "request_id": {
                   "$ref": "#/definitions/http_request_id"
+                },
+                "service_name": {
+                  "$ref": "#/definitions/http_service_name"
                 },
                 "time_ms": {
                   "$ref": "#/definitions/time_ms"
@@ -699,6 +699,12 @@
       "type": "string",
       "enum": ["http", "https"],
       "description": "The HTTP request scheme."
+    },
+    "http_service_name": {
+      "type": "string",
+      "description": "A short label / name for the service you are sending the request to, ex: elasticsearch",
+      "minLength": 1,
+      "maxLength": 255
     },
     "http_status": {
       "type": "integer",
