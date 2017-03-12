@@ -151,6 +151,7 @@
             "created_at": {
               "type": "string",
               "format": "date-time",
+              "description": "When the release was created, ISO8601 date time."
             },
             "version": {
               "type": "string",
