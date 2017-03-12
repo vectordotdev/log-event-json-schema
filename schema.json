@@ -274,11 +274,23 @@
           "maxProperties": 1,
           "additionalProperties": false,
           "properties": {
-            "config_change": {
-
-            },
             "error": {
-
+              "type": "object",
+              "description": "Errors specific to the platform. For example, Heroku specific platform errors.",
+              "required": ["code", "desc"],
+              "additionalProperties": false,
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "Unique error code",
+                  "maxLength": 255
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Human friendly description of the error.",
+                  "maxLength": 255
+                }
+              }
             }
           }
         },
