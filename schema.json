@@ -138,6 +138,26 @@
             }
           }
         },
+        "release": {
+          "type": "object",
+          "description": "Contextual information on the current release",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "properties": {
+            "commit_hash": {
+              "type": "string",
+              "description": "The git commit sha for the deploy"
+            },
+            "date": {
+              "type": "string",
+              "format": "date-time",
+            },
+            "version": {
+              "type": "string",
+              "description": "Deploy version. Ex: 1.1.2"
+            }
+          }
+        },
         "runtime": {
           "type": "object",
           "description": "Represents the language runtime details.",
