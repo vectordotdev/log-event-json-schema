@@ -148,7 +148,7 @@
               "type": "string",
               "description": "The git commit sha for the deploy"
             },
-            "date": {
+            "created_at": {
               "type": "string",
               "format": "date-time",
             },
