@@ -680,13 +680,13 @@
       "type": "string",
       "description": "The body of the HTTP request / response.",
       "minLength": 1,
-      "maxLength": 2000
+      "maxLength": 10000
     },
     "http_headers": {
       "type": "object",
       "description": "An object representing HTTP headers.",
       "minProperties": 1,
-      "maxProperties": 50
+      "maxProperties": 100
     },
     "http_host": {
       "type": "string",
@@ -703,7 +703,7 @@
       "type": "string",
       "description": "The path of the HTTP request.",
       "minLength": 1,
-      "maxLength": 2000
+      "maxLength": 5000
     },
     "http_port": {
       "type": "integer",
@@ -714,7 +714,7 @@
       "type": "string",
       "description": "The query parameters present on the URL.",
       "minLength": 1,
-      "maxLength": 1000
+      "maxLength": 10000
     },
     "http_remote_addr": {
       "type": "string",
