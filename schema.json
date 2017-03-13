@@ -277,7 +277,7 @@
             "error": {
               "type": "object",
               "description": "Errors specific to the platform. For example, Heroku specific platform errors.",
-              "required": ["code", "desc"],
+              "required": ["code", "description"],
               "additionalProperties": false,
               "properties": {
                 "code": {
