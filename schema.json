@@ -346,7 +346,7 @@
                         "type": "string",
                         "description": "The line file path.",
                         "minLength": 1,
-                        "maxLength": 255
+                        "maxLength": 1000
                       },
                       "function": {
                         "type": "string",
@@ -366,7 +366,7 @@
                   "type": "string",
                   "description": "The message describing the exception.",
                   "minLength": 1,
-                  "maxLength": 2000
+                  "maxLength": 10000
                 },
                 "name": {
                   "type": "string",
