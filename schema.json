@@ -146,7 +146,9 @@
           "properties": {
             "commit_hash": {
               "type": "string",
-              "description": "The git commit sha for the deploy"
+              "description": "The git commit sha for the deploy",
+              "minLength": 1,
+              "maxLength": 255
             },
             "created_at": {
               "type": "string",
@@ -155,7 +157,9 @@
             },
             "version": {
               "type": "string",
-              "description": "Deploy version, can be an unique string. Ex: 1.1.2 or a43fdw"
+              "description": "Deploy version, can be an unique string. Ex: 1.1.2 or a43fdw",
+              "minLength": 1,
+              "maxLength": 255
             }
           }
         },
@@ -181,7 +185,7 @@
               "type": "string",
               "description": "The current file path from the root of the project.",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 1000
             },
             "function": {
               "type": "string",
@@ -218,7 +222,7 @@
               "type": "string",
               "description": "The server hostname.",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 2000
             },
             "pid": {
               "type": "string",
@@ -288,7 +292,7 @@
                 "description": {
                   "type": "string",
                   "description": "Human friendly description of the error.",
-                  "maxLength": 255
+                  "maxLength": 1000
                 }
               }
             }
@@ -525,7 +529,7 @@
                   "type": "string",
                   "description": "The unique name of the template. This generally includes the path.",
                   "minLength": 1,
-                  "maxLength": 255
+                  "maxLength": 1000
                 },
                 "time_ms": {
                   "$ref": "#/definitions/time_ms"
@@ -626,8 +630,9 @@
                 },
                 "fwd": {
                   "type": "string",
-                  "format": "ipv4",
-                  "description": "The IP address of the original requestor."
+                  "description": "The IP address of the requestor.",
+                  "minLength": 1,
+                  "maxLength": 255
                 },
                 "host": {
                   "$ref": "#/definitions/http_host"
