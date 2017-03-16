@@ -669,14 +669,18 @@
       "additionalProperties": {
         "type": "object",
         "minProperties": 1,
-        "maxProperties": 20,
+        "maxProperties": 50,
         "additionalProperties": {
           "minProperties": 1,
-          "maxProperties": 20,
+          "maxProperties": 50,
           "additionalProperties": {
             "minProperties": 1,
-            "maxProperties": 20,
-            "additionalProperties": false
+            "maxProperties": 50,
+            "additionalProperties": {
+              "minProperties": 1,
+              "maxProperties": 50,
+              "additionalProperties": false
+            }
           }
         }
       }
