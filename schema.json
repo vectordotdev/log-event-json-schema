@@ -269,7 +269,7 @@
       "additionalProperties": false,
       "properties": {
         "custom": {
-          "$ref": "#/definitions/custom",
+          "$ref": "#/definitions/custom"
         },
         "platform": {
           "type": "object",
