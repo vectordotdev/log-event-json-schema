@@ -328,6 +328,7 @@
             },
             "exception": {
               "type": "object",
+              "description": "Exceptions / errors within your application.",
               "required": ["backtrace", "name", "message"],
               "additionalProperties": false,
               "properties": {
