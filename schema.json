@@ -131,6 +131,7 @@
                   "minimum": 1
                 },
                 "source": {
+                  "type": "string",
                   "description": "The source of the log message. For example, Heroku can send log messages for the web.1 dyno from both within the app and Heroku itself.",
                   "enum": ["app", "heroku"]
                 }
