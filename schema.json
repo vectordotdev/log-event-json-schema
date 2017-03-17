@@ -664,7 +664,7 @@
   "definitions": {
     "custom": {
       "type": "object",
-      "descrition": "Custom properties / data.",
+      "description": "Custom properties / data.",
       "minProperties": 1,
       "maxProperties": 1,
       "additionalProperties": {
