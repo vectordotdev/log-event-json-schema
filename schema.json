@@ -669,20 +669,8 @@
       "additionalProperties": {
         "type": "object",
         "minProperties": 1,
-        "maxProperties": 50,
-        "additionalProperties": {
-          "minProperties": 1,
-          "maxProperties": 50,
-          "additionalProperties": {
-            "minProperties": 1,
-            "maxProperties": 50,
-            "additionalProperties": {
-              "minProperties": 1,
-              "maxProperties": 50,
-              "additionalProperties": false
-            }
-          }
-        }
+        "maxProperties": 100,
+        "additionalProperties": true
       }
     },
     "http_body": {
