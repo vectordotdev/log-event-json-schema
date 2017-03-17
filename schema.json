@@ -541,6 +541,7 @@
           }
         },
         "server": {
+          "type": "object",
           "description": "Namespace for all server events, such as memory / cpu samples.",
           "minProperties": 1,
           "maxProperties": 1,
@@ -616,6 +617,7 @@
         },
         "web_server": {
           "type": "object",
+          "description": "Namespace for all web server (nginx, Apache, etc) events.",
           "minProperties": 1,
           "maxProperties": 1,
           "additionalProperties": false,
