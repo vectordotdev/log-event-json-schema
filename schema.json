@@ -541,6 +541,10 @@
           }
         },
         "server": {
+          "description": "Namespace for all server events, such as memory / cpu samples.",
+          "minProperties": 1,
+          "maxProperties": 1,
+          "additionalProperties": false,
           "cpu_sample": {
             "type": "object",
             "description": "A sample of the current server processor usage.",
