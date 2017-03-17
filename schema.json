@@ -269,7 +269,7 @@
       "additionalProperties": false,
       "properties": {
         "custom": {
-          "$ref": "#/definitions/custom"
+          "$ref": "#/definitions/custom",
         },
         "platform": {
           "type": "object",
@@ -664,6 +664,7 @@
   "definitions": {
     "custom": {
       "type": "object",
+      "descrition": "Custom properties / data.",
       "minProperties": 1,
       "maxProperties": 1,
       "additionalProperties": {
