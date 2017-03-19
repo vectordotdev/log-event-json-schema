@@ -323,6 +323,12 @@
                   "description": "The name of the controller action being called.",
                   "minLength": 1,
                   "maxLength": 255
+                },
+                "params_json": {
+                  "type": "string",
+                  "description": "A JSON encoded represntation of the parsed parameters being sent to the controller.",
+                  "minLength": 1,
+                  "maxLength": 10000 // same size as the http_body field
                 }
               }
             },
