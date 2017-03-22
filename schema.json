@@ -213,6 +213,20 @@
             }
           }
         },
+        "session": {
+          "type": "object",
+          "description": "The user's current session. A session is a way to track a user without the need for authentication. For example, a browser session is generally maintained through a cookie and assigned a unique ID.",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The unique ID of this session.",
+              "minLength": 1,
+              "maxLength": 255
+            }
+          }
+        },
         "system": {
           "type": "object",
           "description": "Operating system details.",
@@ -328,7 +342,7 @@
                   "type": "string",
                   "description": "A JSON encoded represntation of the parsed parameters being sent to the controller.",
                   "minLength": 1,
-                  "maxLength": 10000 // same size as the http_body field
+                  "maxLength": 5000
                 }
               }
             },
@@ -694,7 +708,7 @@
       "type": "string",
       "description": "The body of the HTTP request / response.",
       "minLength": 1,
-      "maxLength": 10000
+      "maxLength": 5000
     },
     "http_headers": {
       "type": "object",
@@ -728,7 +742,7 @@
       "type": "string",
       "description": "The query parameters present on the URL.",
       "minLength": 1,
-      "maxLength": 10000
+      "maxLength": 5000
     },
     "http_remote_addr": {
       "type": "string",
