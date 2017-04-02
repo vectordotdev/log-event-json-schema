@@ -71,7 +71,7 @@
         "http": {
           "type": "object",
           "description": "Context about the HTTP request currently being processed (if any)",
-          "required": ["method", "path"],
+          "required": ["method"],
           "additionalProperties": false,
           "properties": {
             "method": {
@@ -405,7 +405,7 @@
             "http_client_request": {
               "type": "object",
               "description": "Represents an outbound HTTP request from within the application.",
-              "required": ["method", "path", "host", "scheme"],
+              "required": ["method", "host", "scheme"],
               "additionalProperties": false,
               "properties": {
                 "body": {
@@ -469,7 +469,7 @@
             "http_server_request": {
               "type": "object",
               "description": "Represents the *reception* of an inbound HTTP request that is being handled by the application.",
-              "required": ["method", "path", "host", "scheme"],
+              "required": ["method", "host", "scheme"],
               "additionalProperties": false,
               "properties": {
                 "body": {
@@ -645,7 +645,7 @@
             "routing": {
               "type": "object",
               "description": "Represents the routing of an incoming HTTP request where a web server acts as a reverse proxy.",
-              "required": ["bytes", "connect_ms", "host", "method", "path", "request_id", "service_ms", "status"],
+              "required": ["bytes", "connect_ms", "host", "method", "request_id", "service_ms", "status"],
               "additionalProperties": false,
               "properties": {
                 "bytes": {
