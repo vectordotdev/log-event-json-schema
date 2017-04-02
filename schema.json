@@ -469,7 +469,7 @@
             "http_server_request": {
               "type": "object",
               "description": "Represents the *reception* of an inbound HTTP request that is being handled by the application.",
-              "required": ["method", "path", "port", "host", "scheme"],
+              "required": ["method", "path", "host", "scheme"],
               "additionalProperties": false,
               "properties": {
                 "body": {
