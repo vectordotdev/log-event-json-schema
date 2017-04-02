@@ -405,7 +405,7 @@
             "http_client_request": {
               "type": "object",
               "description": "Represents an outbound HTTP request from within the application.",
-              "required": ["method", "path", "port", "host", "scheme", "service_name"],
+              "required": ["method", "path", "host", "scheme"],
               "additionalProperties": false,
               "properties": {
                 "body": {
