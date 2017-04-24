@@ -1,27 +1,10 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Timber.io Log Event Schema",
+  "title": "Official JSON schema for the Timber librarie's log events (https://github.com/timberio)",
   "type": "object",
-  "required": ["$schema", "application_id", "id", "dt", "message"],
+  "required": ["dt", "message"],
   "additionalProperties": false,
   "properties": {
-    "$schema": {
-      "type": "string",
-      "description": "The URL for the Timber log line JSON schema that the current document adheres to.",
-      "minLength": 1,
-      "maxLength": 255
-    },
-    "application_id": {
-      "type": "integer",
-      "description": "The application ID this log line is a member of.",
-      "minimum": 1
-    },
-    "id": {
-      "type": "string",
-      "description": "The unique identifer for this log line. This identifier is created and assigned by Timber.",
-      "minLength": 1,
-      "maxLength": 255
-    },
     "dt": {
       "type": "string",
       "format": "date-time",
@@ -36,17 +19,6 @@
       "description": "The raw log event message, formatting stripped.",
       "maxLength": 50000
     },
-    "formatted_message": {
-      "type": "string",
-      "description": "The log event message, formatting preserved.",
-      "maxLength": 50000
-    },
-    "parsed_message": {
-      "type": "object",
-      "description": "Internal object used to hold structured data passed in the message itself. Clients should not send this data, Timber will automatically parse your message and place the data here.",
-      "minProperties": 1,
-      "maxProperties": 100
-    },
     "tags": {
       "type": "array",
       "description": "An array of tags to be associated with this log line.",
@@ -55,9 +27,6 @@
       "items": {
         "type": "string"
       }
-    },
-    "time_ms": {
-      "$ref": "#/definitions/time_ms"
     },
     "context": {
       "type": "object",
@@ -617,7 +586,7 @@
               "$ref": "#/definitions/http_status"
             }
           }
-        }
+        },
         "sql_query": {
           "type": "object",
           "description": "An outgoing SQL query sent from the application.",
