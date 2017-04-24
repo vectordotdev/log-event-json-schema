@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "allOf": [
+    {"$ref": "#/definitions/address"},
+    {
+      "title": "An extension specifically for the timber.io service. Any log event coming out of timber.io will adhere to the additions here.",
+      "required": ["$schema", "application_id", "id", "dt", "message"],
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "description": "The URL for the Timber log line JSON schema that the current document adheres to.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "application_id": {
+          "type": "integer",
+          "description": "The application ID this log line is a member of.",
+          "minimum": 1
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique identifer for this log line. This identifier is created and assigned by Timber.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "formatted_message": {
+          "type": "string",
+          "description": "The log event message, formatting preserved.",
+          "maxLength": 50000
+        },
+        "parsed_message": {
+          "type": "object",
+          "description": "Internal object used to hold structured data passed in the message itself. Clients should not send this data, Timber will automatically parse your message and place the data here.",
+          "minProperties": 1,
+          "maxProperties": 100
+        },
+      }
+    }
+  ]
+}
