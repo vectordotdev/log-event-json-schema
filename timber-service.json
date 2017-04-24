@@ -33,7 +33,7 @@
           "description": "Internal object used to hold structured data passed in the message itself. Clients should not send this data, Timber will automatically parse your message and place the data here.",
           "minProperties": 1,
           "maxProperties": 100
-        },
+        }
       }
     }
   ]
