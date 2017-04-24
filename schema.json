@@ -28,6 +28,9 @@
         "type": "string"
       }
     },
+    "time_ms": {
+      "$ref": "#/definitions/time_ms"
+    },
     "context": {
       "type": "object",
       "description": "Contextual metadata about the environment the event takes place in",
