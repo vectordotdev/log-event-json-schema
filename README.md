@@ -8,11 +8,11 @@ This repository contains the official JSON schema definitions for the Timber lib
 4. [Timber for Python](https://github.com/timberio/timber-python)
 5. [Timber for Ruby](https://github.com/timberio/timber-ruby)
 
-The Timber libraries provide a better default log policy for the languages they serve. As a result,
-they automatically structure logs into official events. Structuring events without a versioned
-definition partially defeats the purpose. This JSON schema allows downstream consumers to
-understand and rely on the structure of the data. It creates a contract and provides for a much
-more stable and pleasant environment for any consumer of this data.
+The Timber libraries are open source libraries that provide a better default log policy for the
+languages they serve. As a result, they automatically structure logs into official events.
+Structuring events without a versioned definition partially defeats the purpose. This JSON schema
+allows downstream consumers to understand and rely on the structure of the data. It creates a
+contract and provides for a much more stable and pleasant environment for any consumer of this data.
 
 
 ## Examples
