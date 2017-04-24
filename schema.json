@@ -1,27 +1,10 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Timber.io Log Event Schema",
+  "title": "Official JSON schema for the Timber librarie's log events (https://github.com/timberio)",
   "type": "object",
-  "required": ["$schema", "application_id", "id", "dt", "message"],
+  "required": ["dt", "message"],
   "additionalProperties": false,
   "properties": {
-    "$schema": {
-      "type": "string",
-      "description": "The URL for the Timber log line JSON schema that the current document adheres to.",
-      "minLength": 1,
-      "maxLength": 255
-    },
-    "application_id": {
-      "type": "integer",
-      "description": "The application ID this log line is a member of.",
-      "minimum": 1
-    },
-    "id": {
-      "type": "string",
-      "description": "The unique identifer for this log line. This identifier is created and assigned by Timber.",
-      "minLength": 1,
-      "maxLength": 255
-    },
     "dt": {
       "type": "string",
       "format": "date-time",
@@ -36,17 +19,6 @@
       "description": "The raw log event message, formatting stripped.",
       "maxLength": 50000
     },
-    "formatted_message": {
-      "type": "string",
-      "description": "The log event message, formatting preserved.",
-      "maxLength": 50000
-    },
-    "parsed_message": {
-      "type": "object",
-      "description": "Internal object used to hold structured data passed in the message itself. Clients should not send this data, Timber will automatically parse your message and place the data here.",
-      "minProperties": 1,
-      "maxProperties": 100
-    },
     "tags": {
       "type": "array",
       "description": "An array of tags to be associated with this log line.",
@@ -55,9 +27,6 @@
       "items": {
         "type": "string"
       }
-    },
-    "time_ms": {
-      "$ref": "#/definitions/time_ms"
     },
     "context": {
       "type": "object",
@@ -283,408 +252,372 @@
       "minProperties": 1,
       "additionalProperties": false,
       "properties": {
+        "cpu_sample": {
+          "type": "object",
+          "description": "A sample of the current server processor usage.",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "properties": {
+            "load_avg_1m": {
+              "type": "number",
+              "description": "The load average for the processor in the last 1 minute. This reflects the number of CPU tasks that are in the ready queue (i.e. waiting to be processed).",
+              "minimum": 0
+            },
+            "load_avg_5m": {
+              "type": "number",
+              "description": "The load average for the processor in the last 5 minutes. This reflects the number of CPU tasks that are in the ready queue (i.e. waiting to be processed).",
+              "minimum": 0
+            },
+            "load_avg_10m": {
+              "type": "number",
+              "description": "The load average for the processor in the last 10 minutes. This reflects the number of CPU tasks that are in the ready queue (i.e. waiting to be processed).",
+              "minimum": 0
+            }
+          }
+        },
+        "controller_call": {
+          "type": "object",
+          "description": "Represents the calling of a controller, typically logged immediately after the request is routed.",
+          "required": ["controller", "action"],
+          "additionalProperties": false,
+          "properties": {
+            "controller": {
+              "type": "string",
+              "description": "The name of the controller being called.",
+              "minLength": 1,
+              "maxLength": 255
+            },
+            "action": {
+              "type": "string",
+              "description": "The name of the controller action being called.",
+              "minLength": 1,
+              "maxLength": 255
+            },
+            "params_json": {
+              "type": "string",
+              "description": "A JSON encoded represntation of the parsed parameters being sent to the controller.",
+              "minLength": 1,
+              "maxLength": 5000
+            }
+          }
+        },
         "custom": {
           "$ref": "#/definitions/custom"
         },
-        "platform": {
+        "exception": {
           "type": "object",
-          "description": "Namespace for all platform (Heroku, AWS Beanstalk, Lambda, etc) events.",
-          "minProperties": 1,
-          "maxProperties": 1,
+          "description": "Exceptions / errors within your application.",
+          "required": ["backtrace", "name", "message"],
           "additionalProperties": false,
           "properties": {
-            "error": {
-              "type": "object",
-              "description": "Errors specific to the platform. For example, Heroku specific platform errors.",
-              "required": ["code", "description"],
-              "additionalProperties": false,
-              "properties": {
-                "code": {
-                  "type": "string",
-                  "description": "Unique error code",
-                  "maxLength": 255
-                },
-                "description": {
-                  "type": "string",
-                  "description": "Human friendly description of the error.",
-                  "maxLength": 1000
-                }
-              }
-            }
-          }
-        },
-        "server_side_app": {
-          "type": "object",
-          "description": "Namespace for all server side application events.",
-          "minProperties": 1,
-          "maxProperties": 1,
-          "additionalProperties": false,
-          "properties": {
-            "controller_call": {
-              "type": "object",
-              "description": "Represents the calling of a controller, typically logged immediately after the request is routed.",
-              "required": ["controller", "action"],
-              "additionalProperties": false,
-              "properties": {
-                "controller": {
-                  "type": "string",
-                  "description": "The name of the controller being called.",
-                  "minLength": 1,
-                  "maxLength": 255
-                },
-                "action": {
-                  "type": "string",
-                  "description": "The name of the controller action being called.",
-                  "minLength": 1,
-                  "maxLength": 255
-                },
-                "params_json": {
-                  "type": "string",
-                  "description": "A JSON encoded represntation of the parsed parameters being sent to the controller.",
-                  "minLength": 1,
-                  "maxLength": 5000
-                }
-              }
-            },
-            "exception": {
-              "type": "object",
-              "description": "Exceptions / errors within your application.",
-              "required": ["backtrace", "name", "message"],
-              "additionalProperties": false,
-              "properties": {
-                "backtrace": {
-                  "type": "array",
-                  "description": "An array of lines, representing the call stack, leading up to the exception.",
-                  "minItems": 1,
-                  "maxItems": 10,
-                  "items": {
-                    "type": "object",
-                    "required": ["file", "function", "line"],
-                    "additionalProperties": false,
-                    "properties": {
-                      "app_name": {
-                        "type": "string",
-                        "description": "Application name, if applicable. For example, erlang / elixir have multiple apps within the same umbrella project.",
-                        "minLength": 1,
-                        "maxLength": 255
-                      },
-                      "file": {
-                        "type": "string",
-                        "description": "The line file path.",
-                        "minLength": 1,
-                        "maxLength": 1000
-                      },
-                      "function": {
-                        "type": "string",
-                        "description": "The calling function name.",
-                        "minLength": 1,
-                        "maxLength": 255
-                      },
-                      "line": {
-                        "type": "integer",
-                        "description": "The calling line number.",
-                        "minimum": 1
-                      }
-                    }
+            "backtrace": {
+              "type": "array",
+              "description": "An array of lines, representing the call stack, leading up to the exception.",
+              "minItems": 1,
+              "maxItems": 10,
+              "items": {
+                "type": "object",
+                "required": ["file", "function", "line"],
+                "additionalProperties": false,
+                "properties": {
+                  "app_name": {
+                    "type": "string",
+                    "description": "Application name, if applicable. For example, erlang / elixir have multiple apps within the same umbrella project.",
+                    "minLength": 1,
+                    "maxLength": 255
+                  },
+                  "file": {
+                    "type": "string",
+                    "description": "The line file path.",
+                    "minLength": 1,
+                    "maxLength": 1000
+                  },
+                  "function": {
+                    "type": "string",
+                    "description": "The calling function name.",
+                    "minLength": 1,
+                    "maxLength": 255
+                  },
+                  "line": {
+                    "type": "integer",
+                    "description": "The calling line number.",
+                    "minimum": 1
                   }
-                },
-                "message": {
-                  "type": "string",
-                  "description": "The message describing the exception.",
-                  "minLength": 1,
-                  "maxLength": 10000
-                },
-                "name": {
-                  "type": "string",
-                  "description": "The name of the exception.",
-                  "minLength": 1,
-                  "maxLength": 255
                 }
               }
             },
-            "http_client_request": {
-              "type": "object",
-              "description": "Represents an outbound HTTP request from within the application.",
-              "required": ["method", "host", "scheme"],
-              "additionalProperties": false,
-              "properties": {
-                "body": {
-                  "$ref": "#/definitions/http_body"
-                },
-                "headers": {
-                  "$ref": "#/definitions/http_headers"
-                },
-                "host": {
-                  "$ref": "#/definitions/http_host"
-                },
-                "method": {
-                  "$ref": "#/definitions/http_method"
-                },
-                "path": {
-                  "$ref": "#/definitions/http_path"
-                },
-                "port": {
-                  "$ref": "#/definitions/http_port"
-                },
-                "query_string": {
-                  "$ref": "#/definitions/http_query_string"
-                },
-                "request_id": {
-                  "$ref": "#/definitions/http_request_id"
-                },
-                "service_name": {
-                  "$ref": "#/definitions/http_service_name"
-                },
-                "scheme": {
-                  "$ref": "#/definitions/http_scheme"
-                }
-              }
+            "message": {
+              "type": "string",
+              "description": "The message describing the exception.",
+              "minLength": 1,
+              "maxLength": 10000
             },
-            "http_client_response": {
-              "type": "object",
-              "description": "Represents response to an outbound HTTP request from within the application.",
-              "required": ["status", "time_ms"],
-              "additionalProperties": false,
-              "properties": {
-                "body": {
-                  "$ref": "#/definitions/http_body"
-                },
-                "headers": {
-                  "$ref": "#/definitions/http_headers"
-                },
-                "status": {
-                  "$ref": "#/definitions/http_status"
-                },
-                "request_id": {
-                  "$ref": "#/definitions/http_request_id"
-                },
-                "service_name": {
-                  "$ref": "#/definitions/http_service_name"
-                },
-                "time_ms": {
-                  "$ref": "#/definitions/time_ms"
-                }
-              }
-            },
-            "http_server_request": {
-              "type": "object",
-              "description": "Represents the *reception* of an inbound HTTP request that is being handled by the application.",
-              "required": ["method", "host", "scheme"],
-              "additionalProperties": false,
-              "properties": {
-                "body": {
-                  "$ref": "#/definitions/http_body"
-                },
-                "headers": {
-                  "$ref": "#/definitions/http_headers"
-                },
-                "method": {
-                  "$ref": "#/definitions/http_method"
-                },
-                "path": {
-                  "$ref": "#/definitions/http_path"
-                },
-                "port": {
-                  "$ref": "#/definitions/http_port"
-                },
-                "host": {
-                  "$ref": "#/definitions/http_host"
-                },
-                "request_id": {
-                  "$ref": "#/definitions/http_request_id"
-                },
-                "scheme": {
-                  "$ref": "#/definitions/http_scheme"
-                },
-                "query_string": {
-                  "$ref": "#/definitions/http_query_string"
-                }
-              }
-            },
-            "http_server_response": {
-              "type": "object",
-              "description": "Represents the *reception* of an inbound HTTP request that is being handled by the application.",
-              "required": ["status", "time_ms"],
-              "additionalProperties": false,
-              "properties": {
-                "body": {
-                  "$ref": "#/definitions/http_body"
-                },
-                "headers": {
-                  "$ref": "#/definitions/http_headers"
-                },
-                "request_id": {
-                  "$ref": "#/definitions/http_request_id"
-                },
-                "status": {
-                  "$ref": "#/definitions/http_status"
-                },
-                "time_ms": {
-                  "$ref": "#/definitions/time_ms"
-                }
-              }
-            },
-            "sql_query": {
-              "type": "object",
-              "description": "An outgoing SQL query sent from the application.",
-              "required": ["sql", "time_ms"],
-              "additionalProperties": false,
-              "properties": {
-                "sql": {
-                  "type": "string",
-                  "description": "The actual SQL statement sent.",
-                  "minLength": 1,
-                  "maxLength": 5000
-                },
-                "time_ms": {
-                  "$ref": "#/definitions/time_ms"
-                }
-              }
-            },
-            "template_render": {
-              "type": "object",
-              "description": "Rendering a template to be sent to the client via the HTTP response.",
-              "required": ["name", "time_ms"],
-              "additionalProperties": false,
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "The unique name of the template. This generally includes the path.",
-                  "minLength": 1,
-                  "maxLength": 1000
-                },
-                "time_ms": {
-                  "$ref": "#/definitions/time_ms"
-                }
-              }
+            "name": {
+              "type": "string",
+              "description": "The name of the exception.",
+              "minLength": 1,
+              "maxLength": 255
             }
           }
         },
-        "server": {
+        "http_client_request": {
           "type": "object",
-          "description": "Namespace for all server events, such as memory / cpu samples.",
-          "minProperties": 1,
-          "maxProperties": 1,
+          "description": "Represents an outbound HTTP request from within the application.",
+          "required": ["method", "host", "scheme"],
           "additionalProperties": false,
           "properties": {
-            "cpu_sample": {
-              "type": "object",
-              "description": "A sample of the current server processor usage.",
-              "minProperties": 1,
-              "additionalProperties": false,
-              "properties": {
-                "load_avg_1m": {
-                  "type": "number",
-                  "description": "The load average for the processor in the last 1 minute. This reflects the number of CPU tasks that are in the ready queue (i.e. waiting to be processed).",
-                  "minimum": 0
-                },
-                "load_avg_5m": {
-                  "type": "number",
-                  "description": "The load average for the processor in the last 5 minutes. This reflects the number of CPU tasks that are in the ready queue (i.e. waiting to be processed).",
-                  "minimum": 0
-                },
-                "load_avg_10m": {
-                  "type": "number",
-                  "description": "The load average for the processor in the last 10 minutes. This reflects the number of CPU tasks that are in the ready queue (i.e. waiting to be processed).",
-                  "minimum": 0
-                }
-              }
+            "body": {
+              "$ref": "#/definitions/http_body"
             },
-            "memory_sample": {
-              "type": "object",
-              "description": "A sample of the current server memory usage.",
-              "minProperties": 1,
-              "additionalProperties": false,
-              "properties": {
-                "rss_mb": {
-                  "type": "number",
-                  "description": "The portion of the memory being used by the target application.",
-                  "minimum": 0
-                },
-                "cache_mb": {
-                  "type": "number",
-                  "description": "The portion of the memory used for disk cache.",
-                  "minimum": 0
-                },
-                "swap_mb": {
-                  "type": "number",
-                  "description": "The portion of the memory stored on disk. Swap usually indicates a shortage of memory.",
-                  "minimum": 0
-                },
-                "total_mb": {
-                  "type": "number",
-                  "description": "The sum of the rss, cache, and swap that equals the total memory being used.",
-                  "minimum": 0
-                },
-                "limit_mb": {
-                  "type": "number",
-                  "description": "The maximum amount of memory, limit, that can be used before swap is used.",
-                  "minimum": 0
-                },
-                "pgpgin": {
-                  "type": "number",
-                  "description": "The cumulative total of the pages read from disk. Sudden high variations on this number can indicate short duration spikes in swap usage. The other memory related metrics are point in time snapshots and can miss short spikes.",
-                  "minimum": 0
-                },
-                "pgpgout": {
-                  "type": "number",
-                  "description": "The cumulative total of the pages written to disk. Sudden high variations on this number can indicate short duration spikes in swap usage. The other memory related metrics are point in time snapshots and can miss short spikes.",
-                  "minimum": 0
-                }
-              }
+            "headers": {
+              "$ref": "#/definitions/http_headers"
+            },
+            "host": {
+              "$ref": "#/definitions/http_host"
+            },
+            "method": {
+              "$ref": "#/definitions/http_method"
+            },
+            "path": {
+              "$ref": "#/definitions/http_path"
+            },
+            "port": {
+              "$ref": "#/definitions/http_port"
+            },
+            "query_string": {
+              "$ref": "#/definitions/http_query_string"
+            },
+            "request_id": {
+              "$ref": "#/definitions/http_request_id"
+            },
+            "service_name": {
+              "$ref": "#/definitions/http_service_name"
+            },
+            "scheme": {
+              "$ref": "#/definitions/http_scheme"
             }
           }
         },
-        "web_server": {
+        "http_client_response": {
           "type": "object",
-          "description": "Namespace for all web server (nginx, Apache, etc) events.",
-          "minProperties": 1,
-          "maxProperties": 1,
+          "description": "Represents response to an outbound HTTP request from within the application.",
+          "required": ["status", "time_ms"],
           "additionalProperties": false,
           "properties": {
-            "routing": {
-              "type": "object",
-              "description": "Represents the routing of an incoming HTTP request where a web server acts as a reverse proxy.",
-              "required": ["bytes", "connect_ms", "host", "method", "request_id", "service_ms", "status"],
-              "additionalProperties": false,
-              "properties": {
-                "bytes": {
-                  "type": "integer",
-                  "description": "The size of the response, in bytes, sent back to the requestor.",
-                  "minimum": 0
-                },
-                "connect_ms": {
-                  "type": "number",
-                  "description": "The time, in fractional milliseconds, it took to connect to the down stream service for processing.",
-                  "minimum": 0
-                },
-                "fwd": {
-                  "type": "string",
-                  "description": "The IP address of the requestor.",
-                  "minLength": 1,
-                  "maxLength": 255
-                },
-                "host": {
-                  "$ref": "#/definitions/http_host"
-                },
-                "method": {
-                  "$ref": "#/definitions/http_method"
-                },
-                "path": {
-                  "$ref": "#/definitions/http_path"
-                },
-                "request_id": {
-                  "$ref": "#/definitions/http_request_id"
-                },
-                "service_ms": {
-                  "type": "number",
-                  "description": "The time, in fractional milliseconds, it took for the downstream service to process and respond to the request.",
-                  "minimum": 0
-                },
-                "status": {
-                  "$ref": "#/definitions/http_status"
-                }
-              }
+            "body": {
+              "$ref": "#/definitions/http_body"
+            },
+            "headers": {
+              "$ref": "#/definitions/http_headers"
+            },
+            "status": {
+              "$ref": "#/definitions/http_status"
+            },
+            "request_id": {
+              "$ref": "#/definitions/http_request_id"
+            },
+            "service_name": {
+              "$ref": "#/definitions/http_service_name"
+            },
+            "time_ms": {
+              "$ref": "#/definitions/time_ms"
+            }
+          }
+        },
+        "http_server_request": {
+          "type": "object",
+          "description": "Represents the *reception* of an inbound HTTP request that is being handled by the application.",
+          "required": ["method", "host", "scheme"],
+          "additionalProperties": false,
+          "properties": {
+            "body": {
+              "$ref": "#/definitions/http_body"
+            },
+            "headers": {
+              "$ref": "#/definitions/http_headers"
+            },
+            "method": {
+              "$ref": "#/definitions/http_method"
+            },
+            "path": {
+              "$ref": "#/definitions/http_path"
+            },
+            "port": {
+              "$ref": "#/definitions/http_port"
+            },
+            "host": {
+              "$ref": "#/definitions/http_host"
+            },
+            "request_id": {
+              "$ref": "#/definitions/http_request_id"
+            },
+            "scheme": {
+              "$ref": "#/definitions/http_scheme"
+            },
+            "query_string": {
+              "$ref": "#/definitions/http_query_string"
+            }
+          }
+        },
+        "http_server_response": {
+          "type": "object",
+          "description": "Represents the *reception* of an inbound HTTP request that is being handled by the application.",
+          "required": ["status", "time_ms"],
+          "additionalProperties": false,
+          "properties": {
+            "body": {
+              "$ref": "#/definitions/http_body"
+            },
+            "headers": {
+              "$ref": "#/definitions/http_headers"
+            },
+            "request_id": {
+              "$ref": "#/definitions/http_request_id"
+            },
+            "status": {
+              "$ref": "#/definitions/http_status"
+            },
+            "time_ms": {
+              "$ref": "#/definitions/time_ms"
+            }
+          }
+        },
+        "memory_sample": {
+          "type": "object",
+          "description": "A sample of the current server memory usage.",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "properties": {
+            "rss_mb": {
+              "type": "number",
+              "description": "The portion of the memory being used by the target application.",
+              "minimum": 0
+            },
+            "cache_mb": {
+              "type": "number",
+              "description": "The portion of the memory used for disk cache.",
+              "minimum": 0
+            },
+            "swap_mb": {
+              "type": "number",
+              "description": "The portion of the memory stored on disk. Swap usually indicates a shortage of memory.",
+              "minimum": 0
+            },
+            "total_mb": {
+              "type": "number",
+              "description": "The sum of the rss, cache, and swap that equals the total memory being used.",
+              "minimum": 0
+            },
+            "limit_mb": {
+              "type": "number",
+              "description": "The maximum amount of memory, limit, that can be used before swap is used.",
+              "minimum": 0
+            },
+            "pgpgin": {
+              "type": "number",
+              "description": "The cumulative total of the pages read from disk. Sudden high variations on this number can indicate short duration spikes in swap usage. The other memory related metrics are point in time snapshots and can miss short spikes.",
+              "minimum": 0
+            },
+            "pgpgout": {
+              "type": "number",
+              "description": "The cumulative total of the pages written to disk. Sudden high variations on this number can indicate short duration spikes in swap usage. The other memory related metrics are point in time snapshots and can miss short spikes.",
+              "minimum": 0
+            }
+          }
+        },
+        "platform_error": {
+          "type": "object",
+          "description": "Errors specific to the platform. For example, Heroku specific platform errors.",
+          "required": ["code", "description"],
+          "additionalProperties": false,
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Unique error code",
+              "maxLength": 255
+            },
+            "description": {
+              "type": "string",
+              "description": "Human friendly description of the error.",
+              "maxLength": 1000
+            }
+          }
+        },
+        "routing": {
+          "type": "object",
+          "description": "Represents the routing of an incoming HTTP request where a web server acts as a reverse proxy.",
+          "required": ["bytes", "connect_ms", "host", "method", "request_id", "service_ms", "status"],
+          "additionalProperties": false,
+          "properties": {
+            "bytes": {
+              "type": "integer",
+              "description": "The size of the response, in bytes, sent back to the requestor.",
+              "minimum": 0
+            },
+            "connect_ms": {
+              "type": "number",
+              "description": "The time, in fractional milliseconds, it took to connect to the down stream service for processing.",
+              "minimum": 0
+            },
+            "fwd": {
+              "type": "string",
+              "description": "The IP address of the requestor.",
+              "minLength": 1,
+              "maxLength": 255
+            },
+            "host": {
+              "$ref": "#/definitions/http_host"
+            },
+            "method": {
+              "$ref": "#/definitions/http_method"
+            },
+            "path": {
+              "$ref": "#/definitions/http_path"
+            },
+            "request_id": {
+              "$ref": "#/definitions/http_request_id"
+            },
+            "service_ms": {
+              "type": "number",
+              "description": "The time, in fractional milliseconds, it took for the downstream service to process and respond to the request.",
+              "minimum": 0
+            },
+            "status": {
+              "$ref": "#/definitions/http_status"
+            }
+          }
+        },
+        "sql_query": {
+          "type": "object",
+          "description": "An outgoing SQL query sent from the application.",
+          "required": ["sql", "time_ms"],
+          "additionalProperties": false,
+          "properties": {
+            "sql": {
+              "type": "string",
+              "description": "The actual SQL statement sent.",
+              "minLength": 1,
+              "maxLength": 5000
+            },
+            "time_ms": {
+              "$ref": "#/definitions/time_ms"
+            }
+          }
+        },
+        "template_render": {
+          "type": "object",
+          "description": "Rendering a template to be sent to the client via the HTTP response.",
+          "required": ["name", "time_ms"],
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The unique name of the template. This generally includes the path.",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "time_ms": {
+              "$ref": "#/definitions/time_ms"
             }
           }
         }

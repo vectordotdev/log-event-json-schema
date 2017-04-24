@@ -1,18 +1,28 @@
 # :evergreen_tree: Timber Log Event JSON Schema
 
-[Schema.json](schema.json) is the formal definition of the [Timber](https://timber.io) log event
-JSON schema. It adheres to the [JSON Schema specification](http://json-schema.org/).
+This repository contains the official JSON schema definitions for the Timber library log events:
 
-The Timber log event schema is a shared, normalized schema that log events can adhere to.
-It's purpose is to normalize log events across *all* platforms into a predictable
-consistent schema that down stream consumers can rely on.
+1. [Timber for Elixir](https://github.com/timberio/timber-elixir)
+2. [Timber for Go](https://github.com/timberio/timber-go)
+3. [Timber for Node](https://github.com/timberio/timber-node)
+4. [Timber for Python](https://github.com/timberio/timber-python)
+5. [Timber for Ruby](https://github.com/timberio/timber-ruby)
+
+The Timber libraries provide a better default log policy for the languages they serve. As a result,
+they automatically structure logs into official events. Structuring events without a versioned
+definition partially defeats the purpose. This JSON schema allows downstream consumers to
+understand and rely on the structure of the data. It creates a contract and provies for a much
+more stable and pleasant environment for any consumer of this data.
 
 
 ## Examples
 
-<details><summary><strong>1. Exception</strong></summary><p>
+Note, that the Timber libraries above handle automatically capturing these events within
+your application. Below are example event JSON strucutures:
 
-A normalized event that represents an exception from within an application.
+<details><summary><strong>1. Exception Event</strong></summary><p>
+
+An event that represents an exception from within your application:
 
 ```javascript
 {
@@ -33,38 +43,36 @@ A normalized event that represents an exception from within an application.
     }
   },
   "event": { // Structured data for the event being logged
-    "server_side_app": { // Top level "domain" for events
-      "exception": { // Event type
-        "name": "RuntimeError",
-        "message": "MissingClass is undefined",
-        "backtrace": [
-          {
-            "file": "/path/to/file",
-            "function": "myFunc",
-            "line": 45
-          },
-          {
-            "file": "/path/to/file",
-            "function": "myFunc",
-            "line": 45
-          },
-          {
-            "file": "/path/to/file",
-            "function": "myFunc",
-            "line": 45
-          },
-          {
-            "file": "/path/to/file",
-            "function": "myFunc",
-            "line": 45
-          },
-          {
-            "file": "/path/to/file",
-            "function": "myFunc",
-            "line": 45
-          }
-        ]
-      }
+    "exception": { // Event type
+      "name": "RuntimeError",
+      "message": "MissingClass is undefined",
+      "backtrace": [
+        {
+          "file": "/path/to/file",
+          "function": "myFunc",
+          "line": 45
+        },
+        {
+          "file": "/path/to/file",
+          "function": "myFunc",
+          "line": 45
+        },
+        {
+          "file": "/path/to/file",
+          "function": "myFunc",
+          "line": 45
+        },
+        {
+          "file": "/path/to/file",
+          "function": "myFunc",
+          "line": 45
+        },
+        {
+          "file": "/path/to/file",
+          "function": "myFunc",
+          "line": 45
+        }
+      ]
     }
   }
 }
@@ -72,9 +80,9 @@ A normalized event that represents an exception from within an application.
 
 </p></details>
 
-<details><summary><strong>2. Incoming HTTP Server Request</strong></summary><p>
+<details><summary><strong>2. HTTP Server Request Event</strong></summary><p>
 
-A normalized event that represents an incoming HTTP request within an application.
+Am event that represents an incoming HTTP request to your application:
 
 ```javascript
 {
@@ -95,20 +103,18 @@ A normalized event that represents an incoming HTTP request within an applicatio
     }
   },
   "event": { // Structured data for the event being logged
-    "server_side_app": { // Top level "domain" for events
-      "http_server_request": { // Event type
-        "method": "GET",
-        "scheme": "https",
-        "host": "timber.io",
-        "path": "/checkout",
-        "port": 443,
-        "headers": {
-          "content_length": 894,
-          "content_type": "application/json", // <- Example of data that wasn't in the log line itself
-          "remove_addr": "192.321.22.21",
-          "request_id": "gy23fbty523",
-          "user_agent": "Mozilla/3.0 (Win95; U)"
-        }
+    "http_server_request": { // Event type
+      "method": "GET",
+      "scheme": "https",
+      "host": "timber.io",
+      "path": "/checkout",
+      "port": 443,
+      "headers": {
+        "content_length": 894,
+        "content_type": "application/json", // <- Example of data that wasn't in the log line itself
+        "remove_addr": "192.321.22.21",
+        "request_id": "gy23fbty523",
+        "user_agent": "Mozilla/3.0 (Win95; U)"
       }
     }
   }
@@ -117,9 +123,9 @@ A normalized event that represents an incoming HTTP request within an applicatio
 
 </p></details>
 
-<details><summary><strong>3. Outgoing HTTP Server Response</strong></summary><p>
+<details><summary><strong>3. HTTP Server Response Event</strong></summary><p>
 
-A normalized event that represents an outgoing HTTP response within an application.
+An event that represents an outgoing HTTP response from your application:
 
 ```javascript
 {
@@ -140,15 +146,13 @@ A normalized event that represents an outgoing HTTP response within an applicati
     }
   },
   "event": { // Structured data for the event being logged
-    "server_side_app": { // Top level "domain" for events
-      "http_server_response": { // Event type
-        "status": 200,
-        "time_ms": 117,
-        "headers": {
-          "content_length": 894,
-          "content_type": "application/json", // <- Example of data that wasn't in the log line itself
-          "request_id": "gy23fbty523"
-        }
+    "http_server_response": { // Event type
+      "status": 200,
+      "time_ms": 117,
+      "headers": {
+        "content_length": 894,
+        "content_type": "application/json", // <- Example of data that wasn't in the log line itself
+        "request_id": "gy23fbty523"
       }
     }
   }
@@ -159,7 +163,7 @@ A normalized event that represents an outgoing HTTP response within an applicati
 
 <details><summary><strong>4. SQL Query</strong></summary><p>
 
-A normalized event that represents an outgoing SQL query from within an application.
+An event that represents a SQL query:
 
 ```javascript
 {
@@ -180,11 +184,9 @@ A normalized event that represents an outgoing SQL query from within an applicat
     }
   },
   "event": { // Structured data for the event being logged
-    "server_side_app": { // Top level "domain" for events
-      "sql_query": { // Event type
-        "sql": "SELECT * FROM users WHERE id = 1",
-        "time_ms": 54
-      }
+    "sql_query": { // Event type
+      "sql": "SELECT * FROM users WHERE id = 1",
+      "time_ms": 54
     }
   }
 }
@@ -194,8 +196,8 @@ A normalized event that represents an outgoing SQL query from within an applicat
 
 <details><summary><strong>5. Serverless Platform Function Invocation</strong></summary><p>
 
-A normalized event that represents function invocations on platforms like AWS Lambda or Google
-Cloud Functions.
+An event that represents a function invocation on serverless platforms like AWS Lambda or Google
+Cloud Functions:
 
 ```javascript
 {
@@ -203,14 +205,12 @@ Cloud Functions.
   "level": "info", // Log levels in your logs!
   "message": "REPORT RequestId: 86792069-eb43-11e6-af8c-d9dfd5859e88  Duration: 236.83 ms Billed Duration: 300 ms Memory Size: 256 MB Max Memory Used: 118 MB", // Human readable message preserved
   "event": { // Structured data for the event being logged
-    "serverless_platform": { // Top level "domain" for events
-      "function_invocation": { // Event type
-        "request_id": "86792069-eb43-11e6-af8c-d9dfd5859e88",
-        "time_ms": 236.83,
-        "billed_duration_ms": 300,
-        "memory_size_mb": 256,
-        "memory_used_mb": 118
-      }
+    "function_invocation": { // Event type
+      "request_id": "86792069-eb43-11e6-af8c-d9dfd5859e88",
+      "time_ms": 236.83,
+      "billed_duration_ms": 300,
+      "memory_size_mb": 256,
+      "memory_used_mb": 118
     }
   }
 }
@@ -219,8 +219,7 @@ Cloud Functions.
 
 <details><summary><strong>6. Platform Error</strong></summary><p>
 
-A normalized event that represents fan error on the platform the application resides. This
-is external to your application. For example, [all of the Heroku errors](https://devcenter.heroku.com/articles/error-codes).
+An event that represents an error application platforms, such as Heroku or ElasticBeanstalk:
 
 ```javascript
 {
@@ -237,15 +236,13 @@ is external to your application. For example, [all of the Heroku errors](https:/
     }
   },
   "event": { // Structured data for the event being logged
-    "server_side_platform": { // Top level "domain" for events
-      "error": { // Event type
-        "code": "H99",
-        "message": "Platform error",
-        "billed_duration_ms": 300,
-        "memory_size_mb": 256,
-        "memory_used_mb": 118,
-        "http_status": 503
-      }
+    "platform_error": { // Event type
+      "code": "H99",
+      "message": "Platform error",
+      "billed_duration_ms": 300,
+      "memory_size_mb": 256,
+      "memory_used_mb": 118,
+      "http_status": 503
     }
   }
 }
@@ -256,29 +253,16 @@ is external to your application. For example, [all of the Heroku errors](https:/
 <strong>7. ...and many more, checkout the schema for a complete list.</strong>
 
 
-## Releases
+## Versioning & Releases
 
 Timber follows the [semver](http://semver.org/) specification for versioning. Releases can
 be found in the [releases](https://github.com/timberio/log-event-json-schema/releases) sections.
 You can also watch this repo to be notified of any upcoming changes.
 
 
-## Backwards compatibility
-
-The Timber API will respect legacy versions. Simply sepcify the version in the `$schema` attribute
-and we'll handle the rest.
-
-
 ## Validation
 
 Data can be validated against the schema using any of [these open source validators](http://json-schema.org/implementations.html).
-
-
-## The Timber Clients
-
-It's rare that anyone will have to create this payload theirselves. Please checkout out our
-[language specific libraries](https://github.com/timberio) as they handle capturing and structuring
-log events from within your application.
 
 
 ## Contributing
