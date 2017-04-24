@@ -161,7 +161,7 @@ An event that represents an outgoing HTTP response from your application:
 
 </p></details>
 
-<details><summary><strong>4. SQL Query</strong></summary><p>
+<details><summary><strong>4. SQL Query Event</strong></summary><p>
 
 An event that represents a SQL query:
 
@@ -194,7 +194,7 @@ An event that represents a SQL query:
 
 </p></details>
 
-<details><summary><strong>5. Serverless Platform Function Invocation</strong></summary><p>
+<details><summary><strong>5. Serverless Platform Function Invocation Event</strong></summary><p>
 
 An event that represents a function invocation on serverless platforms like AWS Lambda or Google
 Cloud Functions:
@@ -217,7 +217,7 @@ Cloud Functions:
 ```
 </p></details>
 
-<details><summary><strong>6. Platform Error</strong></summary><p>
+<details><summary><strong>6. Platform Error Event</strong></summary><p>
 
 An event that represents an error application platforms, such as Heroku or ElasticBeanstalk:
 
