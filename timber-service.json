@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "allOf": [
-    {"$ref": "../schema.json"},
+    {"$ref": "https://raw.githubusercontent.com/timberio/log-event-json-schema/v2.0.0/schema.json"},
     {
       "title": "An extension specifically for the timber.io service. Any log event coming out of timber.io will adhere to the additions here.",
       "required": ["$schema", "application_id", "id", "dt", "message"],
