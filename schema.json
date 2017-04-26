@@ -271,7 +271,7 @@
               "description": "The load average for the processor in the last 5 minutes. This reflects the number of CPU tasks that are in the ready queue (i.e. waiting to be processed).",
               "minimum": 0
             },
-            "load_avg_10m": {
+            "load_avg_15m": {
               "type": "number",
               "description": "The load average for the processor in the last 10 minutes. This reflects the number of CPU tasks that are in the ready queue (i.e. waiting to be processed).",
               "minimum": 0
