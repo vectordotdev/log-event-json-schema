@@ -556,7 +556,7 @@
               "type": "string",
               "description": "The short name of the error.",
               "minLength": 1,
-              "maxLength": 255,
+              "maxLength": 255
             }
           }
         },
