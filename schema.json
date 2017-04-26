@@ -531,25 +531,39 @@
         "platform_error": {
           "type": "object",
           "description": "Errors specific to the platform. For example, Heroku specific platform errors.",
-          "required": ["code", "description"],
+          "required": ["code"],
           "additionalProperties": false,
           "properties": {
+            "cause": {
+              "type": "string",
+              "description": "The cause of the error.",
+              "minLength": 1,
+              "maxLength": 255
+            },
             "code": {
               "type": "string",
-              "description": "Unique error code",
+              "description": "The unique error code",
+              "minLength": 1,
               "maxLength": 255
             },
             "description": {
               "type": "string",
-              "description": "Human friendly description of the error.",
+              "description": "The human friendly description of the error.",
+              "minLength": 1,
               "maxLength": 1000
+            },
+            "name": {
+              "type": "string",
+              "description": "The short name of the error.",
+              "minLength": 1,
+              "maxLength": 255,
             }
           }
         },
         "routing": {
           "type": "object",
-          "description": "Represents the routing of an incoming HTTP request where a web server acts as a reverse proxy.",
-          "required": ["bytes", "connect_ms", "host", "method", "request_id", "service_ms", "status"],
+          "description": "Represents the routing of an incoming HTTP request where a web server acts as a reverse proxy. This event can also contain errors encountered while forwarding the request.",
+          "required": ["host", "method", "status"],
           "additionalProperties": false,
           "properties": {
             "bytes": {
@@ -561,6 +575,24 @@
               "type": "number",
               "description": "The time, in fractional milliseconds, it took to connect to the down stream service for processing.",
               "minimum": 0
+            },
+            "error_cause": {
+              "type": "string",
+              "description": "The cause of the error, if applicable.",
+              "minLength": 1,
+              "maxLength": 255
+            },
+            "error_code": {
+              "type": "string",
+              "description": "The unique code of the error encountered.",
+              "minLength": 1,
+              "maxLength": 255
+            },
+            "error_description": {
+              "type": "string",
+              "description": "The human friendly description of the error.",
+              "minLength": 1,
+              "maxLength": 1000
             },
             "fwd": {
               "type": "string",
@@ -577,6 +609,9 @@
             "path": {
               "$ref": "#/definitions/http_path"
             },
+            "query_string": {
+              "$ref": "#/definitions/http_query_string"
+            },
             "request_id": {
               "$ref": "#/definitions/http_request_id"
             },
@@ -584,6 +619,12 @@
               "type": "number",
               "description": "The time, in fractional milliseconds, it took for the downstream service to process and respond to the request.",
               "minimum": 0
+            },
+            "sock": {
+              "type": "string",
+              "description": "The socket used for the request, applicable to web sockets.",
+              "minLength": "1",
+              "maxLength": "255"
             },
             "status": {
               "$ref": "#/definitions/http_status"
