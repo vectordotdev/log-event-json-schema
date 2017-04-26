@@ -623,8 +623,8 @@
             "sock": {
               "type": "string",
               "description": "The socket used for the request, applicable to web sockets.",
-              "minLength": "1",
-              "maxLength": "255"
+              "minLength": 1,
+              "maxLength": 255
             },
             "status": {
               "$ref": "#/definitions/http_status"
