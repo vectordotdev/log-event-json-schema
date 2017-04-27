@@ -8,7 +8,8 @@ improves data consumption reliability, and solves one of the major issues of wor
 This schema is used internally at [Timber](https://timber.io) and across thousands of companies
 with success. It's the core reason the Timber logging platform is able to provide a great user
 experience out of the box. It enables us to make assumptions about your data and work with
-predictable structures. There's no reason any consumer of this data can't get the same benefit.
+predictable structures. There's no reason any consumer of this data, even your own internal ones,
+can't get the same benefit.
 
 
 ## Implementation
@@ -219,7 +220,7 @@ An event that represents a SQL query:
 </p></details>
 
 
-<strong>5. ...and many more, checkout the schema for a complete list.</strong>
+<strong>5. ...and many more, checkout the [schema](schema.json) for a complete list.</strong>
 
 
 ## Versioning & Releases
