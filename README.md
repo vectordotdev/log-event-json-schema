@@ -5,10 +5,10 @@ This helps normalize log data across applications and teams, and it provides a c
 downstream consumers of the data (graphs, alerts, etc). Defining a schema reduces unexpected issues,
 improves data consumption reliability, and solves one of the major issues of working with log data.
 
-This schema is used internally at [Timber](https://timber.io) across thousands of companies
-with success. It the core reason the Timber logging platform is able to provide a great user
+This schema is used internally at [Timber](https://timber.io) and across thousands of companies
+with success. It's the core reason the Timber logging platform is able to provide a great user
 experience out of the box. It enables us to make assumptions about your data and work with
-predictable structures.
+predictable structures. There's no reason any consumer of this data can't get the same benefit.
 
 
 ## Implementation
