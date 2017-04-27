@@ -1,4 +1,4 @@
-# :evergreen_tree: Simple Log Event JSON Schema
+# Simple Log Event JSON Schema
 
 The purpose of this schema is to define a _simple_ structure for logging structured events.
 This helps normalize log data across applications and teams, and it provides a contract for
