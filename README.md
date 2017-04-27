@@ -1,6 +1,20 @@
-# :evergreen_tree: Timber Log Event JSON Schema
+# :evergreen_tree: Simple Log Event JSON Schema
 
-This repository contains the official JSON schema definitions for the Timber library log events:
+The purpose of this schema is to define a _simple_ structure for logging structured events.
+This helps normalize log data across applications and teams, and it provides a contract for
+downstream consumers of the data (graphs, alerts, etc). Defining a schema reduces unexpected issues,
+improves data consumption reliability, and solves one of the major issues of working with log data.
+
+This schema is used internally at [Timber](https://timber.io) across thousands of companies
+with success. It the core reason the Timber logging platform is able to provide a great user
+experience out of the box. It enables us to make assumptions about your data and work with
+predictable structures.
+
+
+## Implementation
+
+You are welcome to log your own structured events that adhere to this schema, or you can use
+one of the Timber libraries that do it for you:
 
 1. [Timber for Elixir](https://github.com/timberio/timber-elixir)
 2. [Timber for Go](https://github.com/timberio/timber-go)
@@ -8,42 +22,51 @@ This repository contains the official JSON schema definitions for the Timber lib
 4. [Timber for Python](https://github.com/timberio/timber-python)
 5. [Timber for Ruby](https://github.com/timberio/timber-ruby)
 
-The Timber libraries are open source libraries that provide a better default log policy for the
-languages they serve. As a result, they automatically structure logs into official events.
-Structuring events without a versioned definition partially defeats the purpose. This JSON schema
-allows downstream consumers to understand and rely on the structure of the data. It creates a
-contract and provides for a much more stable and pleasant environment for any consumer of this data.
 
+## The Schema
 
-## Examples
-
-Note, that the Timber libraries above handle automatically capturing these events within
-your application. Below are example event JSON strucutures:
-
-<details><summary><strong>1. Exception Event</strong></summary><p>
-
-An event that represents an exception from within your application:
+You can check out [schema.json](schema.json) for the full schema definition, but here's a
+quick rundown:
 
 ```javascript
 {
-  "dt": "2016-12-01T02:23:12.236543Z", // Consistent dates with nanosecond precision
-  "level": "error", // Log levels in your logs!
-  "message": "(RuntimeError) MissingClass is undefined", // Human readable message preserved
-  "context": { // Context is shared across all relevant logs and acts as join data
+  "dt": "2016-12-01T02:23:12.236543Z",           // Consistent ISO8601 dates with nanosecond precision
+  "level": "info",                               // The level of the log
+  "message": "POST /checkout for 192.321.22.21", // Human readable message
+  "context": { ... },                            // Context data shared across log line, think of it like join data for your logs
+  "event": { ... }                               // Structured representation of this log event
+}
+```
+
+For actual events, see below.
+
+
+## Event Examples
+
+<details><summary><strong>1. Exception Event</strong></summary><p>
+
+A structured event that represents an exception from within your application:
+
+```javascript
+{
+  "dt": "2016-12-01T02:23:12.236543Z",
+  "level": "error",
+  "message": "(RuntimeError) MissingClass is undefined",
+  "context": {
     "http": {
       "method": "GET",
       "path": "/checkout",
       "remote_addr": "123.456.789.10",
-      "request_id": "abcd1234" // Trace your requests!
+      "request_id": "abcd1234" // <------------- View all logs within a requst!
     },
-    "user": { // Associate users with your log events!
+    "user": { // <------------------------------ Associate users with your log events!
       "id": 2,
       "name": "Ben Johnson",
       "email": "ben@johnson.com"
     }
   },
-  "event": { // Structured data for the event being logged
-    "exception": { // Event type
+  "event": {
+    "exception": {
       "name": "RuntimeError",
       "message": "MissingClass is undefined",
       "backtrace": [
@@ -82,27 +105,27 @@ An event that represents an exception from within your application:
 
 <details><summary><strong>2. HTTP Server Request Event</strong></summary><p>
 
-Am event that represents an incoming HTTP request to your application:
+Am event that represents an incoming HTTP request to your application's HTTP server:
 
 ```javascript
 {
-  "dt": "2016-12-01T02:23:12.236543Z", // Consistent dates with nanosecond precision
-  "level": "info", // Log levels in your logs!
-  "message": "POST /checkout for 192.321.22.21", // Human readable message preserved
-  "context": { // Context is shared across all relevant logs and acts as join data
+  "dt": "2016-12-01T02:23:12.236543Z",
+  "level": "info",
+  "message": "POST /checkout for 192.321.22.21",
+  "context": {
     "http": {
       "method": "GET",
       "path": "/checkout",
       "remote_addr": "123.456.789.10",
-      "request_id": "abcd1234" // Trace your requests!
+      "request_id": "abcd1234" // <------------- View all logs within a requst!
     },
-    "user": { // Associate users with your log events!
+    "user": { // <------------------------------ Associate users with your log events!
       "id": 2,
       "name": "Ben Johnson",
       "email": "ben@johnson.com"
     }
   },
-  "event": { // Structured data for the event being logged
+  "event": {
     "http_server_request": { // Event type
       "method": "GET",
       "scheme": "https",
@@ -129,30 +152,31 @@ An event that represents an outgoing HTTP response from your application:
 
 ```javascript
 {
-  "dt": "2016-12-01T02:23:12.236543Z", // Consistent dates with nanosecond precision
-  "level": "info", // Log levels in your logs!
-  "message": "Sent 200 OK in 117ms", // Human readable message preserved
-  "context": { // Context is shared across all relevant logs and acts as join data
+  "dt": "2016-12-01T02:23:12.236543Z",
+  "level": "info",
+  "message": "Sent 200 OK in 117ms",
+  "context": {
     "http": {
       "method": "GET",
       "path": "/checkout",
       "remote_addr": "123.456.789.10",
-      "request_id": "abcd1234" // Trace your requests!
+      "request_id": "abcd1234" // <------------- View all logs within a requst!
     },
-    "user": { // Associate users with your log events!
+    "user": { // <------------------------------ Associate users with your log events!
       "id": 2,
       "name": "Ben Johnson",
       "email": "ben@johnson.com"
     }
   },
-  "event": { // Structured data for the event being logged
+  "event": {
     "http_server_response": { // Event type
+      "request_id": "gy23fbty523",
       "status": 200,
       "time_ms": 117,
       "headers": {
         "content_length": 894,
-        "content_type": "application/json", // <- Example of data that wasn't in the log line itself
-        "request_id": "gy23fbty523"
+        "content_type": "application/json",
+        "x_request_id": "gy23fbty523"
       }
     }
   }
@@ -167,23 +191,23 @@ An event that represents a SQL query:
 
 ```javascript
 {
-  "dt": "2016-12-01T02:23:12.236543Z", // Consistent dates with nanosecond precision
-  "level": "info", // Log levels in your logs!
-  "message": "SELECT * FROM users WHERE id = 1 (54ms)", // Human readable message preserved
-  "context": { // Context is shared across all relevant logs and acts as join data
+  "dt": "2016-12-01T02:23:12.236543Z",
+  "level": "info",
+  "message": "SELECT * FROM users WHERE id = 1 (54ms)",
+  "context": {
     "http": {
       "method": "GET",
       "path": "/checkout",
       "remote_addr": "123.456.789.10",
-      "request_id": "abcd1234" // Trace your requests!
+      "request_id": "abcd1234" // <------------- View all logs within a requst!
     },
-    "user": { // Associate users with your log events!
+    "user": { // <------------------------------ Associate users with your log events!
       "id": 2,
       "name": "Ben Johnson",
       "email": "ben@johnson.com"
     }
   },
-  "event": { // Structured data for the event being logged
+  "event": {
     "sql_query": { // Event type
       "sql": "SELECT * FROM users WHERE id = 1",
       "time_ms": 54
@@ -194,63 +218,8 @@ An event that represents a SQL query:
 
 </p></details>
 
-<details><summary><strong>5. Serverless Platform Function Invocation Event</strong></summary><p>
 
-An event that represents a function invocation on serverless platforms like AWS Lambda or Google
-Cloud Functions:
-
-```javascript
-{
-  "dt": "2016-12-01T02:23:12.236543Z", // Consistent dates with nanosecond precision
-  "level": "info", // Log levels in your logs!
-  "message": "REPORT RequestId: 86792069-eb43-11e6-af8c-d9dfd5859e88  Duration: 236.83 ms Billed Duration: 300 ms Memory Size: 256 MB Max Memory Used: 118 MB", // Human readable message preserved
-  "event": { // Structured data for the event being logged
-    "function_invocation": { // Event type
-      "request_id": "86792069-eb43-11e6-af8c-d9dfd5859e88",
-      "time_ms": 236.83,
-      "billed_duration_ms": 300,
-      "memory_size_mb": 256,
-      "memory_used_mb": 118
-    }
-  }
-}
-```
-</p></details>
-
-<details><summary><strong>6. Platform Error Event</strong></summary><p>
-
-An event that represents an error application platforms, such as Heroku or ElasticBeanstalk:
-
-```javascript
-{
-  "dt": "2016-12-01T02:23:12.236543Z", // Consistent dates with nanosecond precision
-  "level": "error", // Log levels in your logs!
-  "message": "at=error code=H99 desc="Platform error" method=GET path="/" host=myapp.herokuapp.com fwd=17.17.17.17 dyno= connect= service= status=503 bytes=", // Human readable message preserved
-  "context": {
-    "http": {
-      "method": "GET",
-      "path": "/",
-      "host": "myapp.herokuapp.com",
-      "remove_addr": "123.34.22.34",
-      "request_id": "x1235"
-    }
-  },
-  "event": { // Structured data for the event being logged
-    "platform_error": { // Event type
-      "code": "H99",
-      "message": "Platform error",
-      "billed_duration_ms": 300,
-      "memory_size_mb": 256,
-      "memory_used_mb": 118,
-      "http_status": 503
-    }
-  }
-}
-```
-
-</p></details>
-
-<strong>7. ...and many more, checkout the schema for a complete list.</strong>
+<strong>5. ...and many more, checkout the schema for a complete list.</strong>
 
 
 ## Versioning & Releases
@@ -267,4 +236,4 @@ Data can be validated against the schema using any of [these open source validat
 
 ## Contributing
 
-Contributions are welcome, please submit a pull request.
+Contributions are very much welcome, please submit a pull request.
