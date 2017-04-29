@@ -11,6 +11,7 @@
       "description": "The date and time at which the log event was generated as a string of the form YYYY-MM-DDTHH:MM:SS.SSSSSSZ"
     },
     "level": {
+      "type": "string",
       "enum": ["debug", "info", "warn", "error", "fatal"],
       "description": "The level of the log event message."
     },
