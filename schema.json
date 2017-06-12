@@ -61,6 +61,20 @@
             }
           }
         },
+        "job": {
+          "type": "object",
+          "description": "Represents a task or job execution, typically for background tasks or jobs.",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "A unique identifier for the job or task.",
+              "minLength": 1,
+              "maxLength": 255
+            }
+          }
+        },
         "organization": {
           "type": "object",
           "description": "Represents an organization in the platform being logged. The interpretation of \"organization\" is left to the consumer.",
