@@ -18,7 +18,7 @@
     "message": {
       "type": "string",
       "description": "The raw log event message, formatting stripped.",
-      "maxLength": 50000
+      "maxLength": 8192
     },
     "tags": {
       "type": "array",
@@ -71,7 +71,7 @@
               "type": "string",
               "description": "A unique identifier for the job or task.",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             }
           }
         },
@@ -85,13 +85,13 @@
               "type": "string",
               "description": "A unique identifier for the organization",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             },
             "name": {
               "type": "string",
               "description": "A display name for the organization",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             }
           }
         },
@@ -110,7 +110,7 @@
                   "type": "string",
                   "description": "The dyno type for the process (web, worker, router, etc)",
                   "minLength": 1,
-                  "maxLength": 255
+                  "maxLength": 256
                 },
                 "dyno_id": {
                   "type": "integer",
@@ -136,7 +136,7 @@
               "type": "string",
               "description": "The git commit sha for the deploy",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             },
             "created_at": {
               "type": "string",
@@ -147,7 +147,7 @@
               "type": "string",
               "description": "Deploy version, can be an unique string. Ex: 1.1.2 or a43fdw",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             }
           }
         },
@@ -161,25 +161,25 @@
               "type": "string",
               "description": "The current application name",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             },
             "class_name": {
               "type": "string",
               "description": "The current class name, if applicable.",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             },
             "file": {
               "type": "string",
               "description": "The current file path from the root of the project.",
               "minLength": 1,
-              "maxLength": 1000
+              "maxLength": 1024
             },
             "function": {
               "type": "string",
               "description": "The current function name, if applicable.",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             },
             "line": {
               "type": "integer",
@@ -190,13 +190,13 @@
               "type": "string",
               "description": "The current module name, if applicable.",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             },
             "vm_pid": {
               "type": "string",
               "description": "The logical process ID as defined by the current language, if applicable.",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             }
           }
         },
@@ -210,7 +210,7 @@
               "type": "string",
               "description": "The unique ID of this session.",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             }
           }
         },
@@ -224,13 +224,13 @@
               "type": "string",
               "description": "The server hostname.",
               "minLength": 1,
-              "maxLength": 2000
+              "maxLength": 256
             },
             "pid": {
               "type": "string",
               "description": "The current operating system process ID as defined by the `pid` command in Unix.",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             }
           }
         },
@@ -244,20 +244,20 @@
               "type": "string",
               "description": "A unique identifier for the user.",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             },
             "name": {
               "type": "string",
               "description": "A display name for the user.",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             },
             "email": {
               "type": "string",
               "description": "An email address for the user. This need not be unique to the user. Note that no validation is performed on this field.",
               "format": "email",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             }
           }
         }
@@ -303,19 +303,19 @@
               "type": "string",
               "description": "The name of the controller being called.",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             },
             "action": {
               "type": "string",
               "description": "The name of the controller action being called.",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             },
             "params_json": {
               "type": "string",
-              "description": "A JSON encoded represntation of the parsed parameters being sent to the controller.",
+              "description": "A JSON encoded representation of the parsed parameters being sent to the controller.",
               "minLength": 1,
-              "maxLength": 5000
+              "maxLength": 2048
             }
           }
         },
@@ -342,19 +342,19 @@
                     "type": "string",
                     "description": "Application name, if applicable. For example, erlang / elixir have multiple apps within the same umbrella project.",
                     "minLength": 1,
-                    "maxLength": 255
+                    "maxLength": 256
                   },
                   "file": {
                     "type": "string",
                     "description": "The line file path.",
                     "minLength": 1,
-                    "maxLength": 1000
+                    "maxLength": 1024
                   },
                   "function": {
                     "type": "string",
                     "description": "The calling function name.",
                     "minLength": 1,
-                    "maxLength": 255
+                    "maxLength": 256
                   },
                   "line": {
                     "type": "integer",
@@ -368,13 +368,13 @@
               "type": "string",
               "description": "The message describing the exception.",
               "minLength": 1,
-              "maxLength": 10000
+              "maxLength": 8192
             },
             "name": {
               "type": "string",
               "description": "The name of the exception.",
               "minLength": 1,
-              "maxLength": 255
+              "maxLength": 256
             }
           }
         },
@@ -553,7 +553,7 @@
               "type": "string",
               "description": "The actual SQL statement sent.",
               "minLength": 1,
-              "maxLength": 5000
+              "maxLength": 1024
             },
             "time_ms": {
               "$ref": "#/definitions/time_ms"
@@ -570,7 +570,7 @@
               "type": "string",
               "description": "The unique name of the template. This generally includes the path.",
               "minLength": 1,
-              "maxLength": 1000
+              "maxLength": 1024
             },
             "time_ms": {
               "$ref": "#/definitions/time_ms"
@@ -597,7 +597,7 @@
       "type": "string",
       "description": "The body of the HTTP request / response.",
       "minLength": 1,
-      "maxLength": 5000
+      "maxLength": 8192
     },
     "http_headers": {
       "type": "object",
@@ -609,7 +609,7 @@
       "type": "string",
       "description": "The target host of the HTTP request. This may not be the same as the real hostname of the server.",
       "minLength": 1,
-      "maxLength": 255
+      "maxLength": 256
     },
     "http_method": {
       "type": "string",
@@ -620,7 +620,7 @@
       "type": "string",
       "description": "The path of the HTTP request.",
       "minLength": 1,
-      "maxLength": 5000
+      "maxLength": 2048
     },
     "http_port": {
       "type": "integer",
@@ -631,19 +631,19 @@
       "type": "string",
       "description": "The query parameters present on the URL.",
       "minLength": 1,
-      "maxLength": 5000
+      "maxLength": 2048
     },
     "http_remote_addr": {
       "type": "string",
       "description": "The IP address of the computer that issued the request.",
       "minLength": 1,
-      "maxLength": 255
+      "maxLength": 256
     },
     "http_request_id": {
       "type": "string",
       "description": "An ID that uniquely identifies the request and can be used to trace requests.",
       "minLength": 1,
-      "maxLength": 255
+      "maxLength": 256
     },
     "http_scheme": {
       "type": "string",
@@ -654,7 +654,7 @@
       "type": "string",
       "description": "A short label / name for the service you are sending the request to, ex: elasticsearch",
       "minLength": 1,
-      "maxLength": 255
+      "maxLength": 256
     },
     "http_status": {
       "type": "integer",
