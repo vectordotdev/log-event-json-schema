@@ -315,7 +315,7 @@
               "type": "string",
               "description": "A JSON encoded representation of the parsed parameters being sent to the controller.",
               "minLength": 1,
-              "maxLength": 2048
+              "maxLength": 8192
             }
           }
         },
