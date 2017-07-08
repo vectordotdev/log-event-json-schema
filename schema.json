@@ -390,6 +390,9 @@
             "headers": {
               "$ref": "#/definitions/http_headers"
             },
+            "headers_json": {
+              "$ref": "#/definitions/http_headers_json"
+            },
             "host": {
               "$ref": "#/definitions/http_host"
             },
@@ -428,6 +431,9 @@
             "headers": {
               "$ref": "#/definitions/http_headers"
             },
+            "headers_json": {
+              "$ref": "#/definitions/http_headers_json"
+            },
             "status": {
               "$ref": "#/definitions/http_status"
             },
@@ -453,6 +459,9 @@
             },
             "headers": {
               "$ref": "#/definitions/http_headers"
+            },
+            "headers_json": {
+              "$ref": "#/definitions/http_headers_json"
             },
             "method": {
               "$ref": "#/definitions/http_method"
@@ -488,6 +497,9 @@
             },
             "headers": {
               "$ref": "#/definitions/http_headers"
+            },
+            "headers_json": {
+              "$ref": "#/definitions/http_headers_json"
             },
             "request_id": {
               "$ref": "#/definitions/http_request_id"
@@ -601,9 +613,14 @@
     },
     "http_headers": {
       "type": "object",
-      "description": "An object representing HTTP headers.",
+      "description": "An object representing *select* HTTP headers that need to be searched or graphed.",
       "minProperties": 1,
       "maxProperties": 100
+    },
+    "http_headers_json": {
+      "type": "string",
+      "description": "A string representing *all* HTTP headers, this is solely used for request inspection.",
+      "maxLEngth": 8192
     },
     "http_host": {
       "type": "string",
