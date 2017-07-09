@@ -46,9 +46,9 @@ For actual events, see below.
 
 ## Event Examples
 
-<details><summary><strong>1. Exception Event</strong></summary><p>
+<details><summary><strong>1. Error Event</strong></summary><p>
 
-A structured event that represents an exception from within your application:
+A structured event that represents an error:
 
 ```javascript
 {
@@ -69,7 +69,7 @@ A structured event that represents an exception from within your application:
     }
   },
   "event": {
-    "exception": {
+    "error": {
       "name": "RuntimeError",
       "message": "MissingClass is undefined",
       "backtrace": [
