@@ -498,7 +498,6 @@
               "type": "object",
               "description": "A sample of the current server processor usage.",
               "required": ["load_avg_1m"],
-              "minProperties": 1,
               "additionalProperties": false,
               "properties": {
                 "load_avg_1m": {
@@ -522,7 +521,6 @@
               "type": "object",
               "description": "A sample of various database and local data server statistics.",
               "required": ["db_size", "active_connections"],
-              "minProperties": 1,
               "additionalProperties": false,
               "properties": {
                 "db_size": {
@@ -563,11 +561,28 @@
                 }
               }
             },
+            "disk": {
+              "type": "object",
+              "description": "A sample of a server's disk usage.",
+              "required": ["read_iops", "write_iops"],
+              "additionalProperties": false,
+              "properties": {
+                "read_iops": {
+                  "type": "integer",
+                  "description": "Number of read operations in I/O sizes of 16KB blocks.",
+                  "minimum": 0
+                },
+                "write_iops": {
+                  "type": "integer",
+                  "description": "Number of write operations in I/O sizes of 16KB blocks.",
+                  "minimum": 0
+                }
+              }
+            },
             "memory": {
               "type": "object",
               "description": "A sample of a server's memory usage.",
               "required": ["limit_mb", "total_mb"],
-              "minProperties": 1,
               "additionalProperties": false,
               "properties": {
                 "cache_mb": {
