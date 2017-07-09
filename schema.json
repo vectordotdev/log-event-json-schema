@@ -582,7 +582,7 @@
             "memory": {
               "type": "object",
               "description": "A sample of a server's memory usage.",
-              "required": ["limit_mb", "total_mb"],
+              "required": ["total_mb"],
               "additionalProperties": false,
               "properties": {
                 "cache_mb": {
@@ -590,9 +590,9 @@
                   "description": "The portion of the memory used for disk cache.",
                   "minimum": 0
                 },
-                "limit_mb": {
+                "free_mb": {
                   "type": "number",
-                  "description": "The maximum amount of memory, limit, that can be used before swap is used.",
+                  "description": "The amount of free memory availabe in megabytes.",
                   "minimum": 0
                 },
                 "pgpgin": {
@@ -607,17 +607,17 @@
                 },
                 "rss_mb": {
                   "type": "number",
-                  "description": "The portion of the memory being used by the target application.",
+                  "description": "The portion of the memory being used by the target application oin megabytes.",
                   "minimum": 0
                 },
                 "swap_mb": {
                   "type": "number",
-                  "description": "The portion of the memory stored on disk. Swap usually indicates a shortage of memory.",
+                  "description": "The portion of the memory stored on disk. Swap usually indicates a shortage of memory in megabytes.",
                   "minimum": 0
                 },
                 "total_mb": {
                   "type": "number",
-                  "description": "The sum of the rss, cache, and swap that equals the total memory being used.",
+                  "description": "The sum of the rss, cache, and swap that equals the total memory being used in megabytes.",
                   "minimum": 0
                 }
               }
