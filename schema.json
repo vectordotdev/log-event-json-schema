@@ -299,15 +299,15 @@
         "custom": {
           "$ref": "#/definitions/custom"
         },
-        "exception": {
+        "error": {
           "type": "object",
-          "description": "Exceptions / errors within your application.",
-          "required": ["backtrace", "name", "message"],
+          "description": "Represents an error or exception.",
+          "required": ["name", "message"],
           "additionalProperties": false,
           "properties": {
             "backtrace": {
               "type": "array",
-              "description": "An array of lines, representing the call stack, leading up to the exception.",
+              "description": "An optional array of lines, representing the call stack, leading up to the error.",
               "minItems": 1,
               "maxItems": 10,
               "items": {
@@ -343,13 +343,13 @@
             },
             "message": {
               "type": "string",
-              "description": "The message describing the exception.",
+              "description": "Optional message describing the error.",
               "minLength": 1,
               "maxLength": 8192
             },
             "name": {
               "type": "string",
-              "description": "The name of the exception.",
+              "description": "Required name of the error.",
               "minLength": 1,
               "maxLength": 256
             }
