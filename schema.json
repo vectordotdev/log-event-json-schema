@@ -517,9 +517,32 @@
                 }
               }
             },
+            "cache": {
+              "type": "object",
+              "description": "A sample of cache statistics and state.",
+              "required": ["db_size", "active_connections"],
+              "additionalProperties": false,
+              "properties": {
+                "active_connections": {
+                  "type": "integer",
+                  "description": "The number of active connections established with the database.",
+                  "minimum": 0
+                },
+                "index_cache_hit_rate": {
+                  "type": "number",
+                  "description": "The ratio of successful reads out of all read operations.",
+                  "minimum": 0
+                },
+                "evicted_keys": {
+                  "type": "integer",
+                  "description": "The number of evicted keys.",
+                  "minimum": 0
+                }
+              }
+            },
             "database": {
               "type": "object",
-              "description": "A sample of various database and local data server statistics.",
+              "description": "A sample of database statistics and state.",
               "required": ["db_size", "active_connections"],
               "additionalProperties": false,
               "properties": {
