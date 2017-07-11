@@ -657,7 +657,7 @@
               "type": "string",
               "description": "The actual SQL statement sent.",
               "minLength": 1,
-              "maxLength": 1024
+              "maxLength": 4096
             },
             "time_ms": {
               "$ref": "#/definitions/time_ms"
