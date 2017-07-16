@@ -216,19 +216,25 @@
         },
         "system": {
           "type": "object",
-          "description": "Operating system details.",
+          "description": "Host and system level details tha the log was generated on.",
           "minProperties": 1,
           "additionalProperties": false,
           "properties": {
             "hostname": {
               "type": "string",
-              "description": "The server hostname.",
+              "description": "The system's hostname.",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "ip": {
+              "type": "string",
+              "description": "The system's IP address (v4 or v6).",
               "minLength": 1,
               "maxLength": 256
             },
             "pid": {
               "type": "string",
-              "description": "The current operating system process ID as defined by the `pid` command in Unix.",
+              "description": "The system's process ID as defined by the `pid` command in Unix.",
               "minLength": 1,
               "maxLength": 256
             }
