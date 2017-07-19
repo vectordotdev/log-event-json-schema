@@ -15,6 +15,12 @@
       "enum": ["debug", "info", "warn", "error", "fatal"],
       "description": "The level of the log event message."
     },
+    "severity": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "The numberical severity of the message represented by an integer between 0 and 7. This conforms to the serverities in the syslog specification."
+    },
     "message": {
       "type": "string",
       "description": "The raw log event message, formatting stripped.",
