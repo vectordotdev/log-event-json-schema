@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Official JSON schema for the Timber librarie's log events (https://github.com/timberio)",
+  "title": "Official JSON schema for the Timber librarie's log events (https://github.com/timberio/log-event-json-schema)",
   "type": "object",
   "required": ["dt", "message"],
   "additionalProperties": false,
@@ -8,12 +8,18 @@
     "dt": {
       "type": "string",
       "format": "date-time",
-      "description": "The date and time at which the log event was generated as a string of the form YYYY-MM-DDTHH:MM:SS.SSSSSSZ"
+      "description": "The IOS8601 formatted datetime when the log was generated."
     },
     "level": {
       "type": "string",
-      "enum": ["debug", "info", "warn", "error", "fatal"],
-      "description": "The level of the log event message."
+      "enum": ["debug", "info", "notice", "warn", "error", "critical", "alert", "emergency"],
+      "description": "The descriptive level of the log in string format. The available options adhere to the Syslog 5424 specification."
+    },
+    "severity": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "The numerical severity of the message represented by an integer between 0 and 7. The available options adhere to the Syslog 5424 specification."
     },
     "message": {
       "type": "string",
