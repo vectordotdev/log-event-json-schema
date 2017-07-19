@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Official JSON schema for the Timber librarie's log events (https://github.com/timberio/)",
+  "title": "Official JSON schema for the Timber librarie's log events (https://github.com/timberio/log-event-json-schema)",
   "type": "object",
   "required": ["dt", "message"],
   "additionalProperties": false,
