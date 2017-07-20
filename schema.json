@@ -45,7 +45,14 @@
       "additionalProperties": false,
       "properties": {
         "custom": {
-          "$ref": "#/definitions/custom"
+          "type": "object",
+          "description": "An open ended object where custom context is supplied.",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": true
+          }
         },
         "http": {
           "type": "object",
@@ -309,7 +316,15 @@
           }
         },
         "custom": {
-          "$ref": "#/definitions/custom"
+          "type": "object",
+          "description": "An open ended object used for custom event data. Only a single root key is allowed, this represents the event type and avoids type collisions in the context of the entire schema.",
+          "minProperties": 1,
+          "maxProperties": 1,
+          "additionalProperties": {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": true
+          }
         },
         "error": {
           "type": "object",
@@ -697,18 +712,6 @@
     }
   },
   "definitions": {
-    "custom": {
-      "type": "object",
-      "description": "Custom properties / data.",
-      "minProperties": 1,
-      "maxProperties": 1,
-      "additionalProperties": {
-        "type": "object",
-        "minProperties": 1,
-        "maxProperties": 100,
-        "additionalProperties": true
-      }
-    },
     "http_body": {
       "type": "string",
       "description": "The body of the HTTP request / response.",
@@ -719,7 +722,6 @@
       "type": "object",
       "description": "An object representing *select* HTTP headers that need to be searched or graphed.",
       "minProperties": 1,
-      "maxProperties": 100
     },
     "http_headers_json": {
       "type": "string",
