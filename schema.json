@@ -48,11 +48,9 @@
           "type": "object",
           "description": "An open ended object where custom context is supplied.",
           "minProperties": 1,
-          "maxProperties": 50,
           "additionalProperties": {
             "type": "object",
             "minProperties": 1,
-            "maxProperties": 100,
             "additionalProperties": true
           }
         },
@@ -325,7 +323,6 @@
           "additionalProperties": {
             "type": "object",
             "minProperties": 1,
-            "maxProperties": 100,
             "additionalProperties": true
           }
         },
@@ -725,7 +722,6 @@
       "type": "object",
       "description": "An object representing *select* HTTP headers that need to be searched or graphed.",
       "minProperties": 1,
-      "maxProperties": 100
     },
     "http_headers_json": {
       "type": "string",
