@@ -721,7 +721,7 @@
     "http_headers": {
       "type": "object",
       "description": "An object representing *select* HTTP headers that need to be searched or graphed.",
-      "minProperties": 1,
+      "minProperties": 1
     },
     "http_headers_json": {
       "type": "string",
