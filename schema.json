@@ -171,16 +171,6 @@
                   "description": "Public hostname assigned by AWS to the EC2 instance. The operating system may report a different hostname based on configuration.",
                   "minLength": 1,
                   "maxLength": 255
-                },
-                "security_groups": {
-                  "type": "array",
-                  "description": "Array of the EC2 or VPC security groups that the EC2 instance is assigned.",
-                  "minItems": 0,
-                  "maxItems": 240,
-                  "items": {
-                    "type": "string",
-                    "description": "Name of the security group"
-                  }
                 }
               }
             }
