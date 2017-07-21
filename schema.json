@@ -426,7 +426,7 @@
             },
             "service_name": {
               "$ref": "#/definitions/http_service_name"
-            },
+            }
           }
         },
         "http_response": {
