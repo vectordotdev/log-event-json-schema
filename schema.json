@@ -668,6 +668,11 @@
       "description": "The value of the Content-Length header representing the size of the request in decimal number of octets.",
       "minimum": 0
     },
+    "http_direction": {
+      "type": "string",
+      "description": "The direction of the HTTP request and response (incoming or outgoing).",
+      "enum": ["incoming", "outgoing"]
+    },
     "http_headers": {
       "type": "object",
       "description": "An object representing *select* HTTP headers that need to be searched or graphed.",
