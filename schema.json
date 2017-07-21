@@ -382,9 +382,9 @@
             }
           }
         },
-        "http_client_request": {
+        "http_request": {
           "type": "object",
-          "description": "Represents an outbound HTTP request from within the application.",
+          "description": "Represents a HTTP request, both incoming and outgoing. Note the direction field.",
           "required": ["method", "host", "scheme"],
           "additionalProperties": false,
           "properties": {
@@ -393,6 +393,9 @@
             },
             "content_length": {
               "$ref": "#/definitions/http_content_length"
+            },
+            "direction": {
+              "$ref": "#/definitions/http_direction"
             },
             "headers": {
               "$ref": "#/definitions/http_headers"
@@ -418,17 +421,14 @@
             "request_id": {
               "$ref": "#/definitions/http_request_id"
             },
-            "service_name": {
-              "$ref": "#/definitions/http_service_name"
-            },
             "scheme": {
               "$ref": "#/definitions/http_scheme"
             }
           }
         },
-        "http_client_response": {
+        "http_response": {
           "type": "object",
-          "description": "Represents response to an outbound HTTP request from within the application.",
+          "description": "Represents a HTTP response event, both outgoing and incoming. Note the direction field.",
           "required": ["status", "time_ms"],
           "additionalProperties": false,
           "properties": {
@@ -438,87 +438,20 @@
             "content_length": {
               "$ref": "#/definitions/http_content_length"
             },
+            "direction": {
+              "$ref": "#/definitions/http_direction"
+            },
             "headers": {
               "$ref": "#/definitions/http_headers"
             },
             "headers_json": {
               "$ref": "#/definitions/http_headers_json"
-            },
-            "status": {
-              "$ref": "#/definitions/http_status"
             },
             "request_id": {
               "$ref": "#/definitions/http_request_id"
             },
             "service_name": {
               "$ref": "#/definitions/http_service_name"
-            },
-            "time_ms": {
-              "$ref": "#/definitions/time_ms"
-            }
-          }
-        },
-        "http_server_request": {
-          "type": "object",
-          "description": "Represents the *reception* of an inbound HTTP request that is being handled by the application.",
-          "required": ["method", "host", "scheme"],
-          "additionalProperties": false,
-          "properties": {
-            "body": {
-              "$ref": "#/definitions/http_body"
-            },
-            "content_length": {
-              "$ref": "#/definitions/http_content_length"
-            },
-            "headers": {
-              "$ref": "#/definitions/http_headers"
-            },
-            "headers_json": {
-              "$ref": "#/definitions/http_headers_json"
-            },
-            "method": {
-              "$ref": "#/definitions/http_method"
-            },
-            "path": {
-              "$ref": "#/definitions/http_path"
-            },
-            "port": {
-              "$ref": "#/definitions/http_port"
-            },
-            "host": {
-              "$ref": "#/definitions/http_host"
-            },
-            "request_id": {
-              "$ref": "#/definitions/http_request_id"
-            },
-            "scheme": {
-              "$ref": "#/definitions/http_scheme"
-            },
-            "query_string": {
-              "$ref": "#/definitions/http_query_string"
-            }
-          }
-        },
-        "http_server_response": {
-          "type": "object",
-          "description": "Represents the *reception* of an inbound HTTP request that is being handled by the application.",
-          "required": ["status", "time_ms"],
-          "additionalProperties": false,
-          "properties": {
-            "body": {
-              "$ref": "#/definitions/http_body"
-            },
-            "content_length": {
-              "$ref": "#/definitions/http_content_length"
-            },
-            "headers": {
-              "$ref": "#/definitions/http_headers"
-            },
-            "headers_json": {
-              "$ref": "#/definitions/http_headers_json"
-            },
-            "request_id": {
-              "$ref": "#/definitions/http_request_id"
             },
             "status": {
               "$ref": "#/definitions/http_status"
