@@ -136,6 +136,53 @@
                   "enum": ["app", "heroku"]
                 }
               }
+            },
+            "aws_ec2": {
+              "type": "object",
+              "description": "Information about the Amazon EC2 instance",
+              "required": ["instance_id", "ami_id", "instance_type"],
+              "properties": {
+                "ami_id": {
+                  "type": "string",
+                  "description": "Amazon Machine Image (AMI) identifier that the instance was launched from",
+                  "minLength": 1,
+                  "maxLength": 256
+                },
+                "hostname": {
+                  "type": "string",
+                  "description": "Hostname of the instance assigned by AWS. The operating system may report a different hostname based on configuration.",
+                  "minLength": 1,
+                  "maxLength": 255
+                },
+                "instance_id": {
+                  "type": "string",
+                  "description": "The unique identifier for the EC2 instance",
+                  "minLength": 1,
+                  "maxLength": 256
+                },
+                "instance_type": {
+                  "type": "string",
+                  "description": "The instance type of the EC2 image (for example, `t2.small`)",
+                  "minLength": 1,
+                  "maxLength": 50
+                },
+                "public_hostname": {
+                  "type": "string",
+                  "description": "Public hostname assigned by AWS to the EC2 instance. The operating system may report a different hostname based on configuration.",
+                  "minLength": 1,
+                  "maxLength": 255
+                },
+                "security_groups": {
+                  "type": "array",
+                  "description": "Array of the EC2 or VPC security groups that the EC2 instance is assigned.",
+                  "minItems": 0,
+                  "maxItems": 240,
+                  "items": {
+                    "type": "string",
+                    "description": "Name of the security group"
+                  }
+                }
+              }
             }
           }
         },
