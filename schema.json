@@ -346,7 +346,7 @@
             },
             "params_json": {
               "type": "string",
-              "description": "A JSON encoded representation of the parsed parameters being sent to the controller.",
+              "description": "An encoded JSON string representing the parsed parameters being sent to the controller. This provides additional insight without the overhead of creating and indexing fields for every paramter.",
               "minLength": 1,
               "maxLength": 8192
             }
@@ -408,6 +408,12 @@
             "message": {
               "type": "string",
               "description": "Optional message describing the error.",
+              "minLength": 1,
+              "maxLength": 8192
+            },
+            "metadata_json": {
+              "type": "string",
+              "description": "A JSON encoded string representing addition error metadata. This provides insight without the overhead of creating and indexing fields.",
               "minLength": 1,
               "maxLength": 8192
             },
@@ -720,7 +726,7 @@
     },
     "http_headers_json": {
       "type": "string",
-      "description": "A string representing *all* HTTP headers, this is solely used for request inspection.",
+      "description": "An encoded JSON string representing *all* HTTP headers. This is used for request inspection without the overhead of creating and indexing fields for every header.",
       "maxLEngth": 8192
     },
     "http_host": {
