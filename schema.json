@@ -532,7 +532,7 @@
             "cache": {
               "type": "object",
               "description": "A sample of cache statistics and state.",
-              "required": ["db_size", "active_connections"],
+              "minProperties": 1,
               "additionalProperties": false,
               "properties": {
                 "active_connections": {
@@ -555,7 +555,7 @@
             "database": {
               "type": "object",
               "description": "A sample of database statistics and state.",
-              "required": ["db_size", "active_connections"],
+              "minProperties": 1,
               "additionalProperties": false,
               "properties": {
                 "db_size": {
