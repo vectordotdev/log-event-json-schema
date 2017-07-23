@@ -504,6 +504,25 @@
             },
             "time_ms": {
               "$ref": "#/definitions/time_ms"
+            },
+            "request": {
+              "type": "object",
+              "description": "The request being responded to. This couples the request data with the response event avoiding the need for joins or external data dependencies. In many cases the data must be coupled with this event because it is represented as a single event (nginx, apache web server, and other reverse proxy servers).",
+              "minProperties": 1,
+              "properties": {
+                "host": {
+                  "$ref": "#/definitions/http_host"
+                },
+                "method": {
+                  "$ref": "#/definitions/http_method"
+                },
+                "path": {
+                  "$ref": "#/definitions/http_path"
+                },
+                "scheme": {
+                  "$ref": "#/definitions/http_scheme"
+                }
+              }
             }
           }
         },
