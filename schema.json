@@ -85,6 +85,12 @@
               "description": "A unique identifier for the job or task.",
               "minLength": 1,
               "maxLength": 256
+            },
+            "queue_name": {
+              "type": "string",
+              "description": "The name of the queue being processes, if applicable.",
+              "minLength": 1,
+              "maxLength": 256
             }
           }
         },
