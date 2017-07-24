@@ -80,6 +80,11 @@
           "minProperties": 1,
           "additionalProperties": false,
           "properties": {
+            "attempt": {
+              "type": "integer",
+              "description": "The attempt number, if applicable.",
+              "minimum": "1"
+            },
             "id": {
               "type": "string",
               "description": "A unique identifier for the job or task.",
