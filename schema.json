@@ -294,8 +294,13 @@
               "maxLength": 256
             },
             "pid": {
+              "type": "integer",
+              "description": "The originating process ID as defined by the `pid` command in Unix.",
+              "minimum": 1
+            },
+            "process_name": {
               "type": "string",
-              "description": "The system's process ID as defined by the `pid` command in Unix.",
+              "description": "The originating process name.",
               "minLength": 1,
               "maxLength": 256
             }
@@ -439,7 +444,7 @@
         "http_request": {
           "type": "object",
           "description": "Represents a HTTP request, both incoming and outgoing. Note the direction field.",
-          "required": ["method", "host", "scheme"],
+          "required": ["method"],
           "additionalProperties": false,
           "properties": {
             "body": {
