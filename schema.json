@@ -275,6 +275,19 @@
             }
           }
         },
+        "source": {
+          "type": "object",
+          "description": "Context about the source of the log",
+          "additionalProperties": false,
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file the log was read from (e.g., \"nodejs.log\")",
+              "minLength": 1,
+              "maxLength": 256
+            }
+          }
+        },
         "system": {
           "type": "object",
           "description": "Host and system level details tha the log was generated on.",
