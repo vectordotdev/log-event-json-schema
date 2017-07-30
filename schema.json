@@ -395,7 +395,7 @@
         "error": {
           "type": "object",
           "description": "Represents an error or exception.",
-          "required": ["name", "message"],
+          "required": ["name"],
           "additionalProperties": false,
           "properties": {
             "backtrace": {
