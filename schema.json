@@ -830,8 +830,6 @@
     },
     "http_status": {
       "type": "integer",
-      "minimum": 100,
-      "maximum": 599,
       "description": "The status as defined by the HTTP status codes."
     },
     "time_ms": {
