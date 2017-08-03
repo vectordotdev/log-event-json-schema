@@ -504,7 +504,7 @@
         "http_response": {
           "type": "object",
           "description": "Represents a HTTP response event, both outgoing and incoming. Note the direction field.",
-          "required": ["status", "time_ms"],
+          "required": ["status"],
           "additionalProperties": false,
           "properties": {
             "body": {
