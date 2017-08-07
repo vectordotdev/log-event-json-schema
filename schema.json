@@ -402,7 +402,7 @@
               "type": "array",
               "description": "An optional array of lines, representing the call stack, leading up to the error.",
               "minItems": 1,
-              "maxItems": 10,
+              "maxItems": 20,
               "items": {
                 "type": "object",
                 "required": ["file", "function", "line"],
