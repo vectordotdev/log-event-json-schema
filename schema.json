@@ -355,6 +355,64 @@
       "minProperties": 1,
       "additionalProperties": false,
       "properties": {
+        "channel_join": {
+          "type": "object",
+          "description": "Represents the joining of a multi-plexed websocket channel.",
+          "required": ["channel", "topic"],
+          "additionalProperties": false,
+          "properties": {
+            "channel": {
+              "type": "string",
+              "description": "The name of the channel being joined.",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "topic": {
+              "type": "string",
+              "description": "The name of the channel topic being joined.",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "metadata_json": {
+              "type": "string",
+              "description": "A JSON encoded string representing additional metadata. This provides insight without the overhead of creating and indexing fields.",
+              "minLength": 1,
+              "maxLength": 8192
+            }
+          }
+        },
+        "channel_receive": {
+          "type": "object",
+          "description": "Represents the receiption of an event on a multi-plexed websocket channel.",
+          "required": ["channel", "topic", "event"],
+          "additionalProperties": false,
+          "properties": {
+            "channel": {
+              "type": "string",
+              "description": "The name of the channel being joined.",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "topic": {
+              "type": "string",
+              "description": "The name of the channel topic being joined.",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "event": {
+              "type": "string",
+              "description": "The name of the event being received.",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "metadata_json": {
+              "type": "string",
+              "description": "A JSON encoded string representing additional metadata. This provides insight without the overhead of creating and indexing fields.",
+              "minLength": 1,
+              "maxLength": 8192
+            }
+          }
+        },
         "controller_call": {
           "type": "object",
           "description": "Represents the calling of a controller, typically logged immediately after the request is routed.",
@@ -442,7 +500,7 @@
             },
             "metadata_json": {
               "type": "string",
-              "description": "A JSON encoded string representing addition error metadata. This provides insight without the overhead of creating and indexing fields.",
+              "description": "A JSON encoded string representing additional metadata. This provides insight without the overhead of creating and indexing fields.",
               "minLength": 1,
               "maxLength": 8192
             },
