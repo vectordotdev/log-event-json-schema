@@ -325,11 +325,23 @@
           "minProperties": 1,
           "additionalProperties": false,
           "properties": {
+            "email": {
+              "type": "string",
+              "description": "An email address for the user. This need not be unique to the user. Note that no validation is performed on this field.",
+              "format": "email",
+              "minLength": 1,
+              "maxLength": 256
+            },
             "id": {
               "type": "string",
               "description": "A unique identifier for the user.",
               "minLength": 1,
               "maxLength": 256
+            },
+            "meta": {
+              "type": "object",
+              "description": "Additional custom metadata you'd like to add to the user.",
+              "minProperties": 1
             },
             "name": {
               "type": "string",
@@ -337,9 +349,9 @@
               "minLength": 1,
               "maxLength": 256
             },
-            "email": {
+            "type": {
               "type": "string",
-              "description": "An email address for the user. This need not be unique to the user. Note that no validation is performed on this field.",
+              "description": "The type of user. Used in systems where there are multiple user types. This helps to denote users in the case of polymorphism.",
               "format": "email",
               "minLength": 1,
               "maxLength": 256
