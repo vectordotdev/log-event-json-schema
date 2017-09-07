@@ -328,7 +328,6 @@
             "email": {
               "type": "string",
               "description": "An email address for the user. This need not be unique to the user. Note that no validation is performed on this field.",
-              "format": "email",
               "minLength": 1,
               "maxLength": 256
             },
