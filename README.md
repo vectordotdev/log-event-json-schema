@@ -1,7 +1,7 @@
 # Simple Log Event Schema
 
 The purpose of this schema is to define a _simple_ structure for log events. It solves the
-unpredictable brittle nature of logs by creating a contract around it's structure. This
+unpredictable, brittle nature of logs by creating a contract around its structure. This
 normalizes log data across applications and teams making it easy for downstream consumers of this
 data (graphs, alerts, etc) to use it effectively. It eliminates unexpected structure changes,
 improves data consumption reliability, and ultimately makes your logs _easily_ useful
@@ -60,7 +60,7 @@ A structured event that represents an error:
       "method": "GET",
       "path": "/checkout",
       "remote_addr": "123.456.789.10",
-      "request_id": "abcd1234" // <------------- View all logs within a requst!
+      "request_id": "abcd1234" // <------------- View all logs within a request!
     },
     "user": { // <------------------------------ Associate users with your log events!
       "id": 2,
@@ -108,7 +108,7 @@ A structured event that represents an error:
 
 <details><summary><strong>2. HTTP Server Request Event</strong></summary><p>
 
-Am event that represents an incoming HTTP request to your application's HTTP server:
+An event that represents an incoming HTTP request to your application's HTTP server:
 
 ```javascript
 {
@@ -120,7 +120,7 @@ Am event that represents an incoming HTTP request to your application's HTTP ser
       "method": "GET",
       "path": "/checkout",
       "remote_addr": "123.456.789.10",
-      "request_id": "abcd1234" // <------------- View all logs within a requst!
+      "request_id": "abcd1234" // <------------- View all logs within a request!
     },
     "user": { // <------------------------------ Associate users with your log events!
       "id": 2,
@@ -163,7 +163,7 @@ An event that represents an outgoing HTTP response from your application:
       "method": "GET",
       "path": "/checkout",
       "remote_addr": "123.456.789.10",
-      "request_id": "abcd1234" // <------------- View all logs within a requst!
+      "request_id": "abcd1234" // <------------- View all logs within a request!
     },
     "user": { // <------------------------------ Associate users with your log events!
       "id": 2,
@@ -202,7 +202,7 @@ An event that represents a SQL query:
       "method": "GET",
       "path": "/checkout",
       "remote_addr": "123.456.789.10",
-      "request_id": "abcd1234" // <------------- View all logs within a requst!
+      "request_id": "abcd1234" // <------------- View all logs within a request!
     },
     "user": { // <------------------------------ Associate users with your log events!
       "id": 2,
