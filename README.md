@@ -4,12 +4,11 @@ The purpose of this schema is to define a _simple_ structure for log events. It 
 unpredictable, brittle nature of logs by creating a contract around its structure. This
 normalizes log data across applications and teams making it easy for downstream consumers of this
 data (graphs, alerts, etc) to use it effectively. It eliminates unexpected structure changes,
-improves data consumption reliability, and ultimately makes your logs _easily_ useful
-(as they should be).
+improves data consumption reliability, and ultimately makes your logs reliable.
 
 This schema is used internally at [Timber](https://timber.io) and across thousands of companies
-with success. It's the core reason the Timber logging platform is able to provide a great user
-experience out of the box. It enables us to make assumptions about your data and work with
+with success. It's the foundational reason the Timber logging platform is able to provide a great
+user experience out of the box. It enables us to make assumptions about your data and work with
 predictable structures. There's no reason any consumer of this data, even your own internal ones,
 can't get the same benefit.
 

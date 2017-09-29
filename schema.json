@@ -446,7 +446,7 @@
               "type": "string",
               "description": "An encoded JSON string representing the parsed parameters being sent to the controller. This provides additional insight without the overhead of creating and indexing fields for every paramter.",
               "minLength": 1,
-              "maxLength": 8192
+              "maxLength": 32768
             }
           }
         },
