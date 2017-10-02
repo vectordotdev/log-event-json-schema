@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [3.1.2] - 2017-10-02
+## [3.1.3] - 2017-10-02
 
 ### Changed
 
   - Raised the limit of the `event.controller_call.params_json` field from `8192` to `32768`.
 
-[Unreleased]: https://github.com/timberio/timber-elixir/compare/v3.1.2...HEAD
-[3.1.2]: https://github.com/timberio/timber-elixir/compare/v3.1.1...v3.1.2
+[Unreleased]: https://github.com/timberio/timber-elixir/compare/v3.1.3...HEAD
+[3.1.2]: https://github.com/timberio/timber-elixir/compare/v3.1.2...v3.1.3
