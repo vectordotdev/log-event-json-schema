@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+  - Added `host` to the `http` context document. This will include the full domain, including any sub-domains.
+
 ## [3.1.3] - 2017-10-02
 
 ### Changed
