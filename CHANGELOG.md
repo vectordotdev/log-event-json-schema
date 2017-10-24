@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [3.2.0] - 2017-10-23
+
 ### Added
 
   - Added `host` to the `http` context document. This will include the full domain, including any sub-domains.
@@ -17,5 +19,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
   - Raised the limit of the `event.controller_call.params_json` field from `8192` to `32768`.
 
-[Unreleased]: https://github.com/timberio/timber-elixir/compare/v3.1.3...HEAD
+[Unreleased]: https://github.com/timberio/timber-elixir/compare/v3.2.0...HEAD
+[3.2.0]: https://github.com/timberio/timber-elixir/compare/v3.1.3...v3.2.0
 [3.1.2]: https://github.com/timberio/timber-elixir/compare/v3.1.2...v3.1.3
