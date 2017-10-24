@@ -60,6 +60,9 @@
           "required": ["method"],
           "additionalProperties": false,
           "properties": {
+            "host": {
+              "$ref": "#/definitions/http_host"
+            },
             "method": {
               "$ref": "#/definitions/http_method"
             },
