@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Removed
+
+  - Removed the `tags` field in favor of using the `context`, `event`, or `meta` keys which offer
+    a structured and more descriptive alternative to attaching data to a log line.
+
 ## [3.2.0] - 2017-10-23
 
 ### Added
