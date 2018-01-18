@@ -866,7 +866,7 @@
       "type": "string",
       "description": "The query parameters present on the URL.",
       "minLength": 1,
-      "maxLength": 2048
+      "maxLength": 4096
     },
     "http_remote_addr": {
       "type": "string",
