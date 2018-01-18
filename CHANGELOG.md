@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [4.0.1] - 2018-01-18
+
 ### Changed
 
   - Raise the `query_string` field limit from 2048 to 4096.
@@ -30,7 +32,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
   - Raised the limit of the `event.controller_call.params_json` field from `8192` to `32768`.
 
-[Unreleased]: https://github.com/timberio/timber-elixir/compare/v4.0.0...HEAD
+[Unreleased]: https://github.com/timberio/timber-elixir/compare/v4.0.1...HEAD
+[4.0.1]: https://github.com/timberio/timber-elixir/compare/v4.0.0...v4.0.1
 [4.0.0]: https://github.com/timberio/timber-elixir/compare/v3.2.0...v4.0.0
 [3.2.0]: https://github.com/timberio/timber-elixir/compare/v3.1.3...v3.2.0
 [3.1.2]: https://github.com/timberio/timber-elixir/compare/v3.1.2...v3.1.3
