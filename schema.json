@@ -392,7 +392,6 @@
             "type": {
               "type": "string",
               "description": "The type of user. Used in systems where there are multiple user types. This helps to denote users in the case of polymorphism.",
-              "format": "email",
               "minLength": 1,
               "maxLength": 256
             }
