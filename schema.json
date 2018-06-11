@@ -533,7 +533,7 @@
                     "type": "string",
                     "description": "The calling function name.",
                     "minLength": 1,
-                    "maxLength": 256
+                    "maxLength": 1024
                   },
                   "line": {
                     "type": "integer",
