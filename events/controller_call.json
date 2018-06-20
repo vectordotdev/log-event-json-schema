@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "...",
+  "title": "Controller Call Event",
+  "description": "A structured event describing the invocation of a controller in an application that follows the MVC design pattern.",
+  "type": "object",
+  "required": ["controller", "action"],
+  "properties": {
+    "controller": {
+      "type": "string",
+      "description": "The name of the controller being called.",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "action": {
+      "type": "string",
+      "description": "The name of the controller action being called.",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "params_json": {
+      "type": "string",
+      "description": "An encoded JSON string representing the parsed parameters being sent to the controller. This provides additional insight without the overhead of creating and indexing fields for every paramter.",
+      "minLength": 1,
+      "maxLength": 32768
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "...",
+  "title": "Heartbeat",
+  "description": "An event that tells down stream services that the application is still alive. Used in low volume applications such as those used in staging or development environments.",
+  "type": "object",
+}

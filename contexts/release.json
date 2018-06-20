@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "...",
+  "title": "Release Context",
+  "description": "Contextual metadata for software releases.",
+  "type": "object",
+  "minProperties": 1,
+  "properties": {
+    "commit_hash": {
+      "type": "string",
+      "description": "The git commit sha for the deploy",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the release was created, ISO8601 date time."
+    },
+    "version": {
+      "type": "string",
+      "description": "Deploy version, can be an unique string. Ex: 1.1.2 or a43fdw",
+      "minLength": 1,
+      "maxLength": 256
+    }
+  },
+  "additionalProperties": false
+}

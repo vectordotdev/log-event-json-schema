@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "...",
+  "title": "Error Event",
+  "description": "A structured event describing an error or exception.",
+  "type": "object",
+  "required": ["name"],
+  "properties": {
+    "backtrace": {
+      "type": "array",
+      "description": "An optional array of lines, representing the call stack, leading up to the error.",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "required": ["file", "function", "line"],
+        "additionalProperties": false,
+        "properties": {
+          "app_name": {
+            "type": "string",
+            "description": "Application name, if applicable. For example, erlang / elixir have multiple apps within the same umbrella project.",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "file": {
+            "type": "string",
+            "description": "The line file path.",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "function": {
+            "type": "string",
+            "description": "The calling function name.",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "line": {
+            "type": "integer",
+            "description": "The calling line number.",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "message": {
+      "type": "string",
+      "description": "Optional message describing the error.",
+      "minLength": 1,
+      "maxLength": 8192
+    },
+    "metadata_json": {
+      "type": "string",
+      "description": "A JSON encoded string representing additional metadata. This provides insight without the overhead of creating and indexing fields.",
+      "minLength": 1,
+      "maxLength": 8192
+    },
+    "name": {
+      "type": "string",
+      "description": "Required name of the error.",
+      "minLength": 1,
+      "maxLength": 256
+    },
+  "additionalProperties": false
+}

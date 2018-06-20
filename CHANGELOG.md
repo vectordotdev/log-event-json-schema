@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+  - Context data structures have been moved to individual files under the `/contexts`
+    directory for organizational purposes.
+  - Event data structures have been moved to individual files under the `/events`
+    directory for organizational purposes.
+  - The `event` root level key was dropped in favor of moving the event type key to the root level.
+    Instead of `event.sql_query` the path is now just `sql_query`.
+  - The `context.platform` key has been removed in favor of moving the platform keys to the
+    `context` level. Instead of `context.platform.aws_ec2` the path is now just `context.aws_ec2`.
+  - Expanded the `http_request` event into `incoming_http_request` and `outgoing_http_request`
+    events.
+  - Expanded the `http_response` event in favor of the `outgoing_http_response` and
+    `incoming_http_response` events.
+
 ## [4.1.0] - 2018-04-03
 
 ### Added

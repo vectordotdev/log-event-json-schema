@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "...",
+  "title": "Kubernetes Context",
+  "description": "Contextual metadata for the Kubernet platform.",
+  "type": "object",
+  "required": ["container_name", "namespace", "pod_name"],
+  "properties": {
+    "container_name": {
+      "type": "string",
+      "description": "The unique identifier for the Docker container running inside the Kubernetes Pod",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "labels": {
+      "type": "object",
+      "description": "The collection of key value pairs found in the Kubernetes Pod metadata field Labels"
+    },
+    "namespace": {
+      "type": "string",
+      "description": "The Kubernetes namespace in which the Pod is running",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "pod_name": {
+      "type": "string",
+      "description": "The name of the Kubernetes Pod in which the Docker container is running",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "root_owner": {
+      "type": "object",
+      "description": "The Kubernetes Resource that is top level owner of the Pod as found through the ownerReferences metadata. This is primarily but not always a Contoller",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind or type of Kubernetes resource",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "name": {
+          "type": "string",
+          "description": "The unique name of the Kubernetes resource",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      }
+    }
+  }
+},
+  "additionalProperties": false
+}

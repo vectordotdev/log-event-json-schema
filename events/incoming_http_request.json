@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "...",
+  "title": "Incoming HTTP Request Event",
+  "description": "A structured event describing the reception of an incoming request over the HTTP protocol, typically used in applications that process incoming HTTP requests.",
+  "type": "object",
+  "required": ["method"],
+  "properties": {
+    "body": {
+      "$ref": "#/definitions/http_body"
+    },
+    "content_length": {
+      "$ref": "#/definitions/http_content_length"
+    },
+    "direction": {
+      "$ref": "#/definitions/http_direction"
+    },
+    "headers": {
+      "$ref": "#/definitions/http_headers"
+    },
+    "headers_json": {
+      "$ref": "#/definitions/http_headers_json"
+    },
+    "host": {
+      "$ref": "#/definitions/http_host"
+    },
+    "method": {
+      "$ref": "#/definitions/http_method"
+    },
+    "path": {
+      "$ref": "#/definitions/http_path"
+    },
+    "port": {
+      "$ref": "#/definitions/http_port"
+    },
+    "query_string": {
+      "$ref": "#/definitions/http_query_string"
+    },
+    "request_id": {
+      "$ref": "#/definitions/http_request_id"
+    },
+    "scheme": {
+      "$ref": "#/definitions/http_scheme"
+    },
+    "service_name": {
+      "$ref": "#/definitions/http_service_name"
+    }
+  },
+  "additionalProperties": false
+}

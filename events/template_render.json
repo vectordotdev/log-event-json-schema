@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "...",
+  "title": "Template Render",
+  "description": "A structured event describing the rendering of a template within an application.",
+  "type": "object",
+  "required": ["name", "time_ms"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The unique name of the template. This generally includes the path.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "time_ms": {
+      "$ref": "#/definitions/time_ms"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "...",
+  "title": "Outgoing HTTP Response Event",
+  "description": "A structured event describing the response to an incoming HTTP request, typically used in applications that process HTTP requests.",
+  "type": "object",
+  "required": ["status"],
+  "properties": {
+    "body": {
+      "$ref": "#/definitions/http_body"
+    },
+    "content_length": {
+      "$ref": "#/definitions/http_content_length"
+    },
+    "direction": {
+      "$ref": "#/definitions/http_direction"
+    },
+    "headers": {
+      "$ref": "#/definitions/http_headers"
+    },
+    "headers_json": {
+      "$ref": "#/definitions/http_headers_json"
+    },
+    "request_id": {
+      "$ref": "#/definitions/http_request_id"
+    },
+    "service_name": {
+      "$ref": "#/definitions/http_service_name"
+    },
+    "status": {
+      "$ref": "#/definitions/http_status"
+    },
+    "time_ms": {
+      "$ref": "#/definitions/time_ms"
+    },
+    "request": {
+      "type": "object",
+      "description": "The request being responded to. This couples the request data with the response event avoiding the need for joins or external data dependencies. In many cases the data must be coupled with this event because it is represented as a single event (nginx, apache web server, and other reverse proxy servers).",
+      "minProperties": 1,
+      "properties": {
+        "host": {
+          "$ref": "#/definitions/http_host"
+        },
+        "method": {
+          "$ref": "#/definitions/http_method"
+        },
+        "path": {
+          "$ref": "#/definitions/http_path"
+        },
+        "scheme": {
+          "$ref": "#/definitions/http_scheme"
+        }
+      }
+    },
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "...",
+  "title": "Channel Join Event",
+  "description": "A custom structured event. This is a namespace for event data not covered by other Timber events; events specific to your application or business.",
+  "type": "object",
+  "minProperties": 1,
+  "maxProperties": 1,
+  "additionalProperties": {
+    "type": "object",
+    "minProperties": 1,
+    "additionalProperties": true
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "...",
+  "title": "Custom Context",
+  "description": "Contextual metadata for user supplied custom context, anything not covered by the Timber official contexts.",
+  "type": "object",
+  "minProperties": 1,
+  "properties": {
+    "type": "object",
+    "minProperties": 1,
+    "additionalProperties": true
+  }
+}

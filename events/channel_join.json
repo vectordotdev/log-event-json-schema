@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "...",
+  "title": "Channel Join Event",
+  "description": "A structured event describing the act of joining a web socket channel.",
+  "type": "object",
+  "required": ["channel", "topic"],
+  "properties": {
+    "channel": {
+      "type": "string",
+      "description": "The name of the channel being joined.",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "topic": {
+      "type": "string",
+      "description": "The name of the channel topic being joined.",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "metadata_json": {
+      "type": "string",
+      "description": "A JSON encoded string representing additional metadata. This provides insight without the overhead of creating and indexing fields.",
+      "minLength": 1,
+      "maxLength": 8192
+    }
+  },
+  "additionalProperties": false
+}

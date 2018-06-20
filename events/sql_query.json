@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "...",
+  "title": "SQL Query",
+  "description": "A structured event describing the execution of a SQL query.",
+  "type": "object",
+  "required": ["sql", "time_ms"],
+  "properties": {
+    "sql": {
+      "type": "string",
+      "description": "The actual SQL statement sent.",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "time_ms": {
+      "$ref": "#/definitions/time_ms"
+    }
+  },
+  "additionalProperties": false
+}

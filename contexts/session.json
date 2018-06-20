@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "...",
+  "title": "Session Context",
+  "description": "Contextual metadata for sessions, typically used for web sessions.",
+  "type": "object",
+  "minProperties": 1,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID of this session.",
+      "minLength": 1,
+      "maxLength": 256
+    }
+  },
+  "additionalProperties": false
+}

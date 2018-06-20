@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "...",
+  "title": "File Context",
+  "description": "Contextual metadata for log data being streamed from a file.",
+  "type": "object",
+  "minProperties": 1,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the file the log was read from (e.g., \"nodejs.log\")",
+      "minLength": 1,
+      "maxLength": 256
+    }
+  },
+  "additionalProperties": false
+}

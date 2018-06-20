@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "...",
+  "title": "HTTP Context",
+  "description": "Contextual metadata for the HTTP protocol, typically used in the context of web services processing incoming HTTP requests.",
+  "type": "object",
+  "required": ["method"],
+  "properties": {
+    "host": {
+      "$ref": "#/definitions/http_host"
+    },
+    "method": {
+      "$ref": "#/definitions/http_method"
+    },
+    "path": {
+      "$ref": "#/definitions/http_path"
+    },
+    "remote_addr": {
+      "$ref": "#/definitions/http_remote_addr"
+    },
+    "request_id": {
+      "$ref": "#/definitions/http_request_id"
+    }
+  },
+  "additionalProperties": false
+}

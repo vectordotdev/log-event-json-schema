@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "...",
+  "title": "Runtime Context",
+  "description": "Contextual metadata for language runtime specifics.",
+  "type": "object",
+  "minProperties": 1,
+  "properties": {
+    "application": {
+      "type": "string",
+      "description": "The current application name",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "class_name": {
+      "type": "string",
+      "description": "The current class name, if applicable.",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "file": {
+      "type": "string",
+      "description": "The current file path from the root of the project.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "function": {
+      "type": "string",
+      "description": "The current function name, if applicable.",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "line": {
+      "type": "integer",
+      "description": "The current line number with in the file.",
+      "minimum": 1
+    },
+    "module_name": {
+      "type": "string",
+      "description": "The current module name, if applicable.",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "vm_pid": {
+      "type": "string",
+      "description": "The logical process ID as defined by the current language, if applicable.",
+      "minLength": 1,
+      "maxLength": 256
+    }
+  },
+  "additionalProperties": false
+}

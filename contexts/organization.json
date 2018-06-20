@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "...",
+  "title": "Organization Context",
+  "description": "Contextual metadata for abstract organization structures, typically used to represent some overarching group entity that users belong to.",
+  "type": "object",
+  "minProperties": 1,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "A unique identifier for the organization",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "name": {
+      "type": "string",
+      "description": "A display name for the organization",
+      "minLength": 1,
+      "maxLength": 256
+    }
+  },
+  "additionalProperties": false
+}
